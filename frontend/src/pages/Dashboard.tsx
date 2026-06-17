@@ -86,9 +86,9 @@ export default function Dashboard() {
       fetch(`${API}/api/batches`).then(r => r.json()),
       fetch(`${API}/api/findings/summary`).then(r => r.json()),
     ]).then(([issues, batches, summary]) => {
-      setApiIssues(issues)
-      setApiBatches(batches)
-      setApiSummary(summary)
+      setApiIssues(Array.isArray(issues) ? issues : [])
+      setApiBatches(Array.isArray(batches) ? batches : [])
+      setApiSummary(summary && !summary.error ? summary : null)
       setDashLoading(false)
     }).catch(() => setDashLoading(false))
   }, [])
