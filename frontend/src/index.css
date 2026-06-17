@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+/* ── DARK MODE ── */
+[data-theme="dark"] body {
+  background: #0f0f1a;
+}
+
+[data-theme="dark"] .main-content {
+  background: #0f0f1a !important;
+}
+
+/* Cards & white surfaces */
+[data-theme="dark"] div[style*="background: #fff"],
+[data-theme="dark"] div[style*="background:#fff"],
+[data-theme="dark"] div[style*='background: "white"'] {
+  background: #1e1e30 !important;
+  border-color: rgba(255,255,255,0.07) !important;
+}
+
+/* Page background */
+[data-theme="dark"] div[style*="background: #f0eef8"],
+[data-theme="dark"] div[style*="background: #f4f2fb"],
+[data-theme="dark"] div[style*="background:#f0eef8"] {
+  background: #0f0f1a !important;
+}
+
+/* Table heads */
+[data-theme="dark"] div[style*="background: #f8f7fc"],
+[data-theme="dark"] tr[style*="background: #f8f7fc"] {
+  background: #252538 !important;
+}
+
+/* Text — primary */
+[data-theme="dark"] div[style*="color: #0d0d12"],
+[data-theme="dark"] span[style*="color: #0d0d12"],
+[data-theme="dark"] td[style*="color: #0d0d12"] {
+  color: #e8e6f0 !important;
+}
+
+/* Text — secondary */
+[data-theme="dark"] div[style*="color: #6b6880"],
+[data-theme="dark"] span[style*="color: #6b6880"],
+[data-theme="dark"] td[style*="color: #6b6880"] {
+  color: #9b98b0 !important;
+}
+
+/* Input fields */
+[data-theme="dark"] input,
+[data-theme="dark"] select,
+[data-theme="dark"] textarea {
+  background: #252538 !important;
+  color: #e8e6f0 !important;
+  border-color: rgba(255,255,255,0.1) !important;
+}
+
+/* Row hover */
+[data-theme="dark"] tr:hover td {
+  background: #252538 !important;
+}
+
+/* Border lines */
+[data-theme="dark"] td {
+  border-color: rgba(255,255,255,0.05) !important;
+}
+
+/* Notification dropdown */
+[data-theme="dark"] div[style*="background: #faf9fe"] {
+  background: #252538 !important;
+}
+
+[data-theme="dark"] div[style*="background: #f8f7fc"] {
+  background: #252538 !important;
+}
+
+/* Smooth transition */
+* {
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.15s ease;
+}
