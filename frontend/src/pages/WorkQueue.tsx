@@ -363,18 +363,28 @@ function IssueModal({ issue, onClose, onStatusChange }: { issue: Issue; onClose:
     return () => window.removeEventListener('keydown', handleKey)
   }, [resolved, fpDone, showFpForm, saving])
 
+  // Map impacted_fields keys to our field keys for matching
+  const impactedSet = new Set(
+    (Array.isArray(issue.impacted_fields) ? issue.impacted_fields : [])
+      .map((f: string) => f.toLowerCase().trim())
+  )
+  const isImpacted = (...keys: string[]) => keys.some(k => impactedSet.has(k))
+
+  const recordAId = issue.provider_id_a || 'Record A'
+  const recordBId = issue.provider_id_b || 'Record B'
+
   const allFields = [
-    { field: 'NPI', a: '1234567890', b: '1234567890', match: 'duplicate' },
-    { field: 'TIN', a: '84-1234567', b: '84-1234567', match: 'match' },
-    { field: 'Address', a: '123 Oak St, Dallas', b: '456 Elm Ave, Dallas', match: 'mismatch' },
-    { field: 'Specialty', a: 'Cardiology', b: 'Cardiology', match: 'match' },
-    { field: 'Status', a: 'Active', b: 'Active', match: 'duplicate' },
-    { field: 'Phone', a: '(214) 555-0101', b: '(214) 555-0188', match: 'mismatch' },
-    { field: 'Taxonomy', a: '207RC0000X', b: '207RC0000X', match: 'match' },
-    { field: 'Network', a: 'PPO Gold', b: 'PPO Gold', match: 'match' },
-    { field: 'Contract start', a: 'Jan 1, 2023', b: 'Mar 15, 2023', match: 'mismatch' },
-    { field: 'Provider type', a: 'Individual', b: 'Individual', match: 'match' },
-    { field: 'Billing NPI', a: '1234567890', b: '1234567890', match: 'match' },
+    { field: 'NPI',            a: String(issue.provider_npi  || issue.npi || 'N/A'), b: 'N/A', impacted: isImpacted('npi', 'provider_npi') },
+    { field: 'TIN',            a: issue.provider_tin           || 'N/A',             b: 'N/A', impacted: isImpacted('tin', 'provider_tin', 'fedid') },
+    { field: 'Address',        a: issue.provider_address       || 'N/A',             b: 'N/A', impacted: isImpacted('address', 'provider_address') },
+    { field: 'Specialty',      a: issue.provider_specialty || issue.specialty || 'N/A', b: 'N/A', impacted: isImpacted('specialty', 'provider_specialty') },
+    { field: 'Active Status',  a: issue.provider_active_status || 'N/A',             b: 'N/A', impacted: isImpacted('active_status', 'provider_active_status', 'status') },
+    { field: 'Phone',          a: issue.provider_phone         || 'N/A',             b: 'N/A', impacted: isImpacted('phone', 'provider_phone') },
+    { field: 'Taxonomy',       a: issue.provider_taxonomy      || 'N/A',             b: 'N/A', impacted: isImpacted('taxonomy', 'provider_taxonomy') },
+    { field: 'Network',        a: issue.provider_network       || 'N/A',             b: 'N/A', impacted: isImpacted('network', 'provider_network') },
+    { field: 'Contract Start', a: issue.provider_contract_start|| 'N/A',             b: 'N/A', impacted: isImpacted('contract_start', 'provider_contract_start') },
+    { field: 'Provider Type',  a: issue.provider_type          || 'N/A',             b: 'N/A', impacted: isImpacted('type', 'provider_type', 'provtype') },
+    { field: 'Billing NPI',    a: issue.provider_billing_npi   || 'N/A',             b: 'N/A', impacted: isImpacted('billing_npi', 'provider_billing_npi') },
   ]
 
   const visibleFields = expanded ? allFields : allFields.slice(0, 5)
@@ -496,8 +506,8 @@ function IssueModal({ issue, onClose, onStatusChange }: { issue: Issue; onClose:
               </div>
             </div>
             <div style={{ fontSize: 12, color: '#4a4560', lineHeight: 1.7, paddingTop: 10, borderTop: '1px solid rgba(124,93,250,0.15)' }}>
-              <strong>Evidence:</strong> {issue.evidence_summary}<br/><br/>
-              <strong>Risk:</strong> {issue.ai_rationale}
+              <strong>Evidence:</strong> {issue.evidence_summary || '—'}<br/>
+              {issue.ai_rationale && <><br/><strong>Risk:</strong> {issue.ai_rationale}</>}
             </div>
           </div>
 
@@ -513,19 +523,23 @@ function IssueModal({ issue, onClose, onStatusChange }: { issue: Issue; onClose:
               <thead>
                 <tr style={{ background: '#f8f7fc' }}>
                   <th style={{ padding: '9px 12px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#6b6880', width: 120 }}>Field</th>
-                  <th style={{ padding: '9px 12px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#6b6880' }}>Record P-00441</th>
-                  <th style={{ padding: '9px 12px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#6b6880' }}>Record P-00893</th>
-                  <th style={{ padding: '9px 12px', textAlign: 'center', fontSize: 11, fontWeight: 600, color: '#6b6880', width: 90 }}>Match</th>
+                  <th style={{ padding: '9px 12px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#6b6880' }}>{recordAId} <span style={{ fontWeight: 400, color: '#a09db8' }}>(live)</span></th>
+                  <th style={{ padding: '9px 12px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#6b6880' }}>{recordBId} <span style={{ fontWeight: 400, color: '#a09db8' }}>(not stored)</span></th>
+                  <th style={{ padding: '9px 12px', textAlign: 'center', fontSize: 11, fontWeight: 600, color: '#6b6880', width: 90 }}>Status</th>
                 </tr>
               </thead>
               <tbody>
                 {visibleFields.map(row => (
                   <tr key={row.field} style={{ borderBottom: '1px solid rgba(0,0,0,0.05)' }}>
                     <td style={{ padding: '9px 12px', color: '#6b6880', fontWeight: 500 }}>{row.field}</td>
-                    <td style={{ padding: '9px 12px', background: row.match !== 'match' ? '#fff5f5' : '#fff', color: row.match !== 'match' ? '#c0392b' : '#0d0d12', fontWeight: row.match !== 'match' ? 500 : 400 }}>{row.a}</td>
-                    <td style={{ padding: '9px 12px', background: row.match === 'mismatch' ? '#f0fdf4' : row.match === 'duplicate' ? '#fff5f5' : '#fff', color: row.match === 'mismatch' ? '#166534' : row.match === 'duplicate' ? '#c0392b' : '#0d0d12', fontWeight: row.match !== 'match' ? 500 : 400 }}>{row.b}</td>
+                    <td style={{ padding: '9px 12px', background: row.impacted ? '#fff5f5' : '#fff', color: row.impacted ? '#c0392b' : row.a === 'N/A' ? '#a09db8' : '#0d0d12', fontWeight: row.impacted ? 500 : 400, fontStyle: row.a === 'N/A' ? 'italic' : 'normal' }}>{row.a}</td>
+                    <td style={{ padding: '9px 12px', color: '#a09db8', fontStyle: 'italic' }}>{row.b}</td>
                     <td style={{ padding: '9px 12px', textAlign: 'center' }}>
-                      {row.match === 'match' ? <span style={{ fontSize: 11, color: '#166534' }}>● Match</span> : row.match === 'duplicate' ? <Tag label="Duplicate" colors="#fff7ed|#b45309" /> : <Tag label="Mismatch" colors="#fff1f1|#c0392b" />}
+                      {row.impacted
+                        ? <Tag label="Impacted" colors="#fff1f1|#c0392b" />
+                        : row.a === 'N/A'
+                          ? <span style={{ fontSize: 11, color: '#a09db8' }}>— N/A</span>
+                          : <span style={{ fontSize: 11, color: '#166534' }}>● OK</span>}
                     </td>
                   </tr>
                 ))}
@@ -648,6 +662,8 @@ export default function WorkQueue() {
   }, [])
 
   const [statusFilter, setStatusFilter] = useState('All')
+  const [currentPage, setCurrentPage] = useState(1)
+  const PAGE_SIZE = 25
 
   useEffect(() => {
     const batch = searchParams.get('batch')
@@ -660,6 +676,9 @@ export default function WorkQueue() {
   function handleStatusChange(sequenceId: string, newStatus: 'Resolved' | 'False Positive') {
     setIssues(prev => prev.map(i => i.sequence_id === sequenceId ? { ...i, status: newStatus } : i))
   }
+
+  // Reset to page 1 whenever filters change
+  useEffect(() => { setCurrentPage(1) }, [search, typeFilter, priorityFilter, dateLabel, activeTab, statusFilter, batchFilter])
 
   const filteredIssues = issues.filter(i => {
     const matchSearch = search === '' ||
@@ -805,8 +824,9 @@ export default function WorkQueue() {
             <tbody>
               {(() => {
                 // Group issues dynamically by date
+                const pagedIssues = filteredIssues.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE)
                 const dateMap: Record<string, Issue[]> = {}
-                filteredIssues.forEach(i => {
+                pagedIssues.forEach(i => {
                   const d = i.detectedAt ? i.detectedAt.slice(0, 10) : 'Unknown'
                   if (!dateMap[d]) dateMap[d] = []
                   dateMap[d].push(i)
@@ -858,11 +878,13 @@ export default function WorkQueue() {
             </tbody>
           </table>
           <div style={{ padding: '10px 18px', borderTop: '1px solid rgba(0,0,0,0.05)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 11, color: '#a09db8' }}>
-            <span>Showing {filteredIssues.length} of {issues.length} issues</span>
+            <span>Showing {Math.min(currentPage * PAGE_SIZE, filteredIssues.length)} of {filteredIssues.length} issues</span>
             <div style={{ display: 'flex', gap: 5 }}>
-              {['← Prev', '1', '2', 'Next →'].map(p => (
-                <div key={p} style={{ padding: '4px 10px', fontSize: 11, borderRadius: 7, cursor: 'pointer', border: '1px solid rgba(0,0,0,0.09)', background: p === '1' ? '#ede9ff' : '#fff', color: p === '1' ? '#7c5dfa' : '#6b6880' }}>{p}</div>
+              <div onClick={() => setCurrentPage(p => Math.max(1, p - 1))} style={{ padding: '4px 10px', fontSize: 11, borderRadius: 7, cursor: currentPage === 1 ? 'default' : 'pointer', border: '1px solid rgba(0,0,0,0.09)', background: '#fff', color: currentPage === 1 ? '#d4d2e0' : '#6b6880' }}>← Prev</div>
+              {Array.from({ length: Math.ceil(filteredIssues.length / PAGE_SIZE) }, (_, i) => i + 1).map(p => (
+                <div key={p} onClick={() => setCurrentPage(p)} style={{ padding: '4px 10px', fontSize: 11, borderRadius: 7, cursor: 'pointer', border: '1px solid rgba(0,0,0,0.09)', background: p === currentPage ? '#ede9ff' : '#fff', color: p === currentPage ? '#7c5dfa' : '#6b6880', fontWeight: p === currentPage ? 600 : 400 }}>{p}</div>
               ))}
+              <div onClick={() => setCurrentPage(p => Math.min(Math.ceil(filteredIssues.length / PAGE_SIZE), p + 1))} style={{ padding: '4px 10px', fontSize: 11, borderRadius: 7, cursor: currentPage === Math.ceil(filteredIssues.length / PAGE_SIZE) ? 'default' : 'pointer', border: '1px solid rgba(0,0,0,0.09)', background: '#fff', color: currentPage === Math.ceil(filteredIssues.length / PAGE_SIZE) ? '#d4d2e0' : '#6b6880' }}>Next →</div>
             </div>
           </div>
         </div>

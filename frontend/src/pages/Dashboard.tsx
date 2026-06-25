@@ -257,14 +257,14 @@ export default function Dashboard() {
               <span style={{ fontSize: 13, fontWeight: 600, color: '#0d0d12' }}>Agent Run History</span>
             </div>
             <div style={{ display: 'flex', gap: 8 }}>
-              <span style={{ fontSize: 11, color: '#6366f1', background: '#eef2ff', padding: '3px 10px', borderRadius: 20, fontWeight: 500 }}>14 runs today</span>
+              <span style={{ fontSize: 11, color: '#6366f1', background: '#eef2ff', padding: '3px 10px', borderRadius: 20, fontWeight: 500 }}>{apiBatches.length} runs today</span>
               <span style={{ fontSize: 11, color: '#6b6880', background: '#f4f3f8', padding: '3px 10px', borderRadius: 20 }}>Next run in 1h 24m</span>
             </div>
           </div>
           <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 12 }}>
             <thead>
               <tr style={{ background: '#f5f8ff' }}>
-                {['Batch ID', 'Time', 'Status', 'Agents Ran', 'Issues Found', 'Duration'].map(h => (
+                {['Batch ID', 'Time', 'Status', 'Agents Ran', 'Issues Found', 'Severity'].map(h => (
                   <th key={h} style={{ padding: '9px 16px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#6b6880', borderBottom: '1px solid rgba(0,0,0,0.06)' }}>{h}</th>
                 ))}
               </tr>

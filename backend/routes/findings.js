@@ -37,12 +37,12 @@ router.get('/summary', async (req, res) => {
   try {
     const result = await query(`
       SELECT
-        COUNT(*)                                                      AS total,
-        COUNT(*) FILTER (WHERE status = 'Open to Resolve')           AS open,
+        COUNT(*)                                                                        AS total,
+        COUNT(*) FILTER (WHERE status IN ('OPEN', 'Open to Resolve'))                  AS open,
         COUNT(*) FILTER (WHERE severity = 'HIGH'
-                          AND  status  = 'Open to Resolve')          AS high_priority,
-        COUNT(*) FILTER (WHERE status = 'Resolved')                  AS resolved,
-        COUNT(*) FILTER (WHERE status = 'False Positive')            AS false_positive
+                          AND  status  IN ('OPEN', 'Open to Resolve'))                 AS high_priority,
+        COUNT(*) FILTER (WHERE status IN ('RESOLVED', 'Resolved'))                     AS resolved,
+        COUNT(*) FILTER (WHERE status IN ('FALSE_POSITIVE', 'False Positive'))         AS false_positive
       FROM uc01_provider_issues
     `)
     res.json(result.rows[0])

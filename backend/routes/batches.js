@@ -13,9 +13,9 @@ router.get('/', async (req, res) => {
         COUNT(*) FILTER (WHERE severity = 'HIGH')                    AS high,
         COUNT(*) FILTER (WHERE severity = 'MEDIUM')                  AS medium,
         COUNT(*) FILTER (WHERE severity = 'LOW')                     AS low,
-        COUNT(*) FILTER (WHERE status = 'Resolved')                  AS resolved,
-        COUNT(*) FILTER (WHERE status = 'Open to Resolve')           AS open,
-        COUNT(*) FILTER (WHERE status = 'False Positive')            AS false_positive
+        COUNT(*) FILTER (WHERE status IN ('RESOLVED', 'Resolved'))                     AS resolved,
+        COUNT(*) FILTER (WHERE status IN ('OPEN', 'Open to Resolve'))                AS open,
+        COUNT(*) FILTER (WHERE status IN ('FALSE_POSITIVE', 'False Positive'))       AS false_positive
       FROM uc01_provider_issues
       GROUP BY batch_id
       ORDER BY run_time DESC
