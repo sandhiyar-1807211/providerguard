@@ -220,7 +220,7 @@ function PrevRunsModal({ sequenceId, issue, onClose }: { sequenceId: string; iss
 
   return (
     <div
-      style={{ position: 'fixed', inset: 0, background: 'rgba(15,17,23,0.55)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}
+      style={{ position: 'fixed', inset: 0, background: 'rgba(15,17,23,0.45)', backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}
       onClick={onClose}
     >
       <div
@@ -434,7 +434,7 @@ function IssueModal({ issue, onClose, onStatusChange }: { issue: Issue; onClose:
 
   return (
     <div
-      style={{ position: 'fixed', inset: 0, background: 'rgba(15,17,23,0.55)', zIndex: 999, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}
+      style={{ position: 'fixed', inset: 0, background: 'rgba(15,17,23,0.45)', backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)', zIndex: 999, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}
       onClick={onClose}
     >
       <div
@@ -629,10 +629,11 @@ export default function WorkQueue() {
       .then(data => {
         const normalized = data.map((i: any) => ({
           ...i,
-          confidence_score: parseFloat(i.confidence_score) / 100,
-          impacted_fields: typeof i.impacted_fields === 'string'
-            ? i.impacted_fields.split(',')
-            : i.impacted_fields || [],
+          impacted_fields: Array.isArray(i.impacted_fields)
+            ? i.impacted_fields
+            : typeof i.impacted_fields === 'string'
+              ? (() => { try { return JSON.parse(i.impacted_fields) } catch { return i.impacted_fields.split(',') } })()
+              : [],
         }))
         setIssues(normalized)
         // Update tab counts
@@ -669,9 +670,11 @@ export default function WorkQueue() {
     const matchPriority = priorityFilter === 'All priorities' || i.severity === priorityFilter
     const matchBatch = !batchFilter || i.batchId === batchFilter
     const matchStatus = statusFilter === 'All' || i.status === statusFilter
+    const today = new Date().toISOString().slice(0, 10)
+    const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10)
     const matchDate = dateLabel === 'All dates' ||
-      (dateLabel === 'Today' && i.detectedAt.startsWith('2026-06-05')) ||
-      (dateLabel === 'Yesterday' && i.detectedAt.startsWith('2026-06-04')) ||
+      (dateLabel === 'Today' && i.detectedAt.startsWith(today)) ||
+      (dateLabel === 'Yesterday' && i.detectedAt.startsWith(yesterday)) ||
       (dateLabel === 'This week' || dateLabel === 'Last 7 days' || dateLabel === 'This month')
     const matchTab = activeTab.startsWith('All') ||
       (activeTab.includes('Provider Ops') && i.queue_name === 'PROVIDER_OPS') ||
@@ -801,18 +804,29 @@ export default function WorkQueue() {
             </thead>
             <tbody>
               {(() => {
-                const dateGroups = [
-                  { label: 'Today — Jun 5, 2026',     ids: filteredIssues.filter(i => i.detectedAt.startsWith('2026-06-05')).map(i => i.sequence_id) },
-                  { label: 'Yesterday — Jun 4, 2026', ids: filteredIssues.filter(i => i.detectedAt.startsWith('2026-06-04')).map(i => i.sequence_id) },
-                ]
-                return dateGroups.map(group => {
-                  const groupIssues = filteredIssues.filter(i => group.ids.includes(i.sequence_id))
+                // Group issues dynamically by date
+                const dateMap: Record<string, Issue[]> = {}
+                filteredIssues.forEach(i => {
+                  const d = i.detectedAt ? i.detectedAt.slice(0, 10) : 'Unknown'
+                  if (!dateMap[d]) dateMap[d] = []
+                  dateMap[d].push(i)
+                })
+                const sortedDates = Object.keys(dateMap).sort((a, b) => b.localeCompare(a))
+                const todayStr = new Date().toISOString().slice(0, 10)
+                const yesterdayStr = new Date(Date.now() - 86400000).toISOString().slice(0, 10)
+                const formatDateLabel = (d: string) => {
+                  if (d === todayStr) return `Today — ${new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`
+                  if (d === yesterdayStr) return `Yesterday — ${new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`
+                  return new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+                }
+                return sortedDates.map(date => {
+                  const groupIssues = dateMap[date]
                   if (!groupIssues.length) return null
                   return (
-                    <Fragment key={group.label}>
+                    <Fragment key={date}>
                       <tr>
                         <td colSpan={10} style={{ padding: '6px 14px', background: '#f8f7fc', fontSize: 11, fontWeight: 600, color: '#7c5dfa', borderBottom: '1px solid rgba(0,0,0,0.06)' }}>
-                          📅 {group.label}
+                          📅 {formatDateLabel(date)}
                         </td>
                       </tr>
                       {groupIssues.map((issue) => (
@@ -825,14 +839,14 @@ export default function WorkQueue() {
                           </td>
                           <td style={{ padding: '10px 12px', color: '#7c5dfa', fontWeight: 600, fontSize: 11 }}><Highlight text={issue.sequence_id.split('-').slice(-2).join('-')} query={search} /></td>
                           <td style={{ padding: '10px 12px' }}>
-                            <div style={{ fontWeight: 500 }}><Highlight text={issue.provider} query={search} /></div>
-                            <div style={{ fontSize: 10, color: '#a09db8' }}>{issue.specialty}</div>
+                            <div style={{ fontWeight: 500 }}><Highlight text={issue.provider || ''} query={search} /></div>
+                            <div style={{ fontSize: 10, color: '#a09db8' }}>{issue.specialty || ''}</div>
                           </td>
-                          <td style={{ padding: '10px 12px', color: '#6b6880' }}><Highlight text={issue.npi} query={search} /></td>
+                          <td style={{ padding: '10px 12px', color: '#6b6880' }}><Highlight text={issue.npi || ''} query={search} /></td>
                           <td style={{ padding: '10px 12px' }}><Tag label={ISSUE_TYPE_LABELS[issue.issue_type]} colors={typeColors[issue.issue_type] || '#f4f3f8|#6b6880'} /></td>
                           <td style={{ padding: '10px 12px' }}><Tag label={SEVERITY_LABELS[issue.severity]} colors={priColors[issue.severity]} /></td>
                           <td style={{ padding: '10px 12px' }}><Tag label={QUEUE_LABELS[issue.queue_name]} colors='#eff6ff|#1d4ed8' /></td>
-                          <td style={{ padding: '10px 12px' }}><Tag label={statusDisplayLabel[issue.status] || issue.status} colors={statusColors[issue.status]} /></td>
+                          <td style={{ padding: '10px 12px' }}><Tag label={statusDisplayLabel[issue.status] || issue.status} colors={statusColors[issue.status] || '#f4f3f8|#6b6880'} /></td>
                           <td style={{ padding: '10px 12px', color: '#a09db8', fontSize: 11 }}>{new Date(issue.detectedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</td>
                         </tr>
                       ))}
@@ -840,6 +854,7 @@ export default function WorkQueue() {
                   )
                 })
               })()}
+
             </tbody>
           </table>
           <div style={{ padding: '10px 18px', borderTop: '1px solid rgba(0,0,0,0.05)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 11, color: '#a09db8' }}>

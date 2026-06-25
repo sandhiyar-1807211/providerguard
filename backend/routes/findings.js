@@ -102,10 +102,42 @@ router.patch('/:id/resolve', async (req, res) => {
   }
 })
 
+// Map status values from agent DB → UI expected values
+const statusMap = {
+  'OPEN':           'Open to Resolve',
+  'RESOLVED':       'Resolved',
+  'FALSE_POSITIVE': 'False Positive',
+  'Open to Resolve':'Open to Resolve',
+  'Resolved':       'Resolved',
+  'False Positive': 'False Positive',
+}
+
+// Map queue names from agent DB → UI expected values
+const queueMap = {
+  'PROVIDER_OPS':  'PROVIDER_OPS',
+  'DIRECTORY_OPS': 'DIRECTORY_OPS',
+  'COMPLIANCE':    'COMPLIANCE',
+  'DATA_QUALITY':  'PROVIDER_OPS',  // map agent queue to UI queue
+}
+
 // Map DB column names → UI field names
 function normalizeIssue(row) {
+  // Parse impacted_fields if it's a JSON string
+  let impactedFields = row.impacted_fields
+  if (typeof impactedFields === 'string') {
+    try { impactedFields = JSON.parse(impactedFields) } catch { impactedFields = impactedFields.split(',') }
+  }
+
+  // confidence_score: if already decimal (< 1), keep as-is; if > 1, divide by 100
+  const rawScore = parseFloat(row.confidence_score) || 0
+  const confidence_score = rawScore > 1 ? rawScore / 100 : rawScore
+
   return {
     ...row,
+    status:          statusMap[row.status] || row.status,
+    queue_name:      queueMap[row.queue_name] || row.queue_name,
+    confidence_score,
+    impacted_fields: impactedFields,
     // UI expects these names
     provider:    row.provider_name,
     npi:         row.provider_npi,
