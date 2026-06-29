@@ -5,6 +5,7 @@ require('dotenv').config()
 const findingsRouter = require('./routes/findings')
 const batchesRouter  = require('./routes/batches')
 const auditRouter    = require('./routes/audit')
+const agentRouter    = require('./routes/agent')
 
 const app  = express()
 const PORT = process.env.PORT || 3001
@@ -31,6 +32,7 @@ app.get('/api/schema', async (_req, res) => {
 app.use('/api/findings', findingsRouter)
 app.use('/api/batches',  batchesRouter)
 app.use('/api/audit',    auditRouter)
+app.use('/api/agent',    agentRouter)
 
 app.listen(PORT, () => {
   console.log(`ProviderGuard API running on http://localhost:${PORT}`)

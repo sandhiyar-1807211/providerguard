@@ -79,6 +79,13 @@ export default function Dashboard() {
   const [apiBatches, setApiBatches] = useState<any[]>([])
   const [apiSummary, setApiSummary] = useState<any>(null)
   const [dashLoading, setDashLoading] = useState(true)
+  const [agentRunning, setAgentRunning] = useState(false)
+  const [agentToast, setAgentToast] = useState<{ msg: string; ok: boolean } | null>(null)
+
+  async function handleRunAgent() {
+    setAgentToast({ msg: '⚙ Agent trigger pending Azure AD setup. Contact agent developer for HTTP trigger URL.', ok: false })
+    setTimeout(() => setAgentToast(null), 5000)
+  }
 
   useEffect(() => {
     Promise.all([
@@ -139,7 +146,7 @@ export default function Dashboard() {
             </div>
           </div>
           <button
-            onClick={() => navigate('/queue')}
+            onClick={handleRunAgent}
             style={{ padding: '9px 20px', background: '#6366f1', color: '#fff', border: 'none', borderRadius: 10, fontSize: 12, fontWeight: 600, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6 }}
           >
             ▶ Run agents
@@ -353,6 +360,13 @@ export default function Dashboard() {
         </div>
 
       </div>
+
+      {/* Agent run toast */}
+      {agentToast && (
+        <div style={{ position: 'fixed', bottom: 28, right: 28, zIndex: 9999, background: agentToast.ok ? '#f0fdf4' : '#fff1f1', border: `1px solid ${agentToast.ok ? '#bbf7d0' : '#fecaca'}`, borderRadius: 12, padding: '13px 18px', display: 'flex', alignItems: 'center', gap: 10, boxShadow: '0 8px 24px rgba(0,0,0,0.12)', minWidth: 300, fontSize: 13, color: agentToast.ok ? '#166534' : '#c0392b', fontWeight: 500 }}>
+          {agentToast.msg}
+        </div>
+      )}
 
         {/* ── FOOTER ── */}
         <div style={{ borderTop: '1px solid #f1f5f9', padding: '12px 28px', display: 'flex', alignItems: 'center', gap: 16, marginTop: 8 }}>
