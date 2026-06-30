@@ -42,6 +42,27 @@ export interface Issue {
   npi: string
   detectedAt: string
   assignedTo: string
+  // Fields from DB (not in original type but returned by backend)
+  provider_npi: string | null
+  provider_tin: string | null
+  provider_address: string | null
+  provider_specialty: string | null
+  provider_active_status: string | null
+  provider_phone: string | null
+  provider_taxonomy: string | null
+  provider_network: string | null
+  provider_contract_start: string | null
+  provider_type: string | null
+  provider_billing_npi: string | null
+  provider_name: string | null
+
+  // Record B fields (duplicate comparison — Module 08)
+  record_b_npi: number | null
+  record_b_tin: string | null
+  record_b_address: string | null
+  record_b_specialty: string | null
+  record_b_active_status: string | null
+  record_b_name: string | null
 }
 
 export interface AgentRun {

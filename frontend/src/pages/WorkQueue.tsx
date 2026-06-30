@@ -70,7 +70,6 @@ function EmptyState({ search, typeFilter, priorityFilter, dateLabel, onClear }: 
   const hasFilter = search || typeFilter !== 'All types' || priorityFilter !== 'All priorities' || dateLabel !== 'All dates'
   return (
     <div style={{ padding: '52px 24px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: '#fff' }}>
-      {/* SVG illustration */}
       <svg width="120" height="100" viewBox="0 0 120 100" fill="none" style={{ marginBottom: 20 }}>
         <rect x="10" y="20" width="100" height="70" rx="10" fill="#f5f2ff" stroke="#e0d9ff" strokeWidth="1.5"/>
         <rect x="22" y="34" width="60" height="7" rx="3.5" fill="#ddd6fe"/>
@@ -82,17 +81,12 @@ function EmptyState({ search, typeFilter, priorityFilter, dateLabel, onClear }: 
         <circle cx="96" cy="33" r="1.5" fill="#7c5dfa"/>
         <line x1="105" y1="43" x2="113" y2="51" stroke="#7c5dfa" strokeWidth="2.5" strokeLinecap="round"/>
       </svg>
-
-      <div style={{ fontSize: 15, fontWeight: 600, color: '#0d0d12', marginBottom: 8 }}>
-        No issues found
-      </div>
+      <div style={{ fontSize: 15, fontWeight: 600, color: '#0d0d12', marginBottom: 8 }}>No issues found</div>
       <div style={{ fontSize: 13, color: '#6b6880', textAlign: 'center', maxWidth: 320, lineHeight: 1.6, marginBottom: 16 }}>
         {hasFilter
           ? 'No issues match your current filters. Try adjusting the search or filter criteria.'
           : 'All issues have been resolved. Great work!'}
       </div>
-
-      {/* Active filters summary */}
       {hasFilter && (
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', justifyContent: 'center', marginBottom: 16 }}>
           {search && <span style={{ fontSize: 11, background: '#ede9ff', color: '#7c5dfa', padding: '3px 10px', borderRadius: 20, fontWeight: 500 }}>Search: "{search}"</span>}
@@ -101,7 +95,6 @@ function EmptyState({ search, typeFilter, priorityFilter, dateLabel, onClear }: 
           {dateLabel !== 'All dates' && <span style={{ fontSize: 11, background: '#ede9ff', color: '#7c5dfa', padding: '3px 10px', borderRadius: 20, fontWeight: 500 }}>{dateLabel}</span>}
         </div>
       )}
-
       {hasFilter && (
         <button
           onClick={onClear}
@@ -122,7 +115,6 @@ const dateOptions = [
   { label: 'Last 7 days', count: 0 },
   { label: 'This month', count: 0 },
 ]
-
 
 // ── PREVIOUS RUNS MOCK DATA ──
 const runHistories: Record<string, { title: string; sub: string; runs: any[] }> = {
@@ -170,8 +162,6 @@ function generateDefaultHistory(issue: Issue) {
   const agents = agentsByType[issue.issue_type] || ['Detection Agent', 'Validation Agent']
   const batchId = issue.batchId
   const reqId   = issue.sequence_id.split('-').slice(-2).join('-')
-
-  // Parse date from batchId (PDM_Monitor_YYMMDDHHMMSS)
   const raw  = batchId.replace('PDM_Monitor_', '')
   const day = raw.slice(4, 6)
   const hr   = raw.slice(6, 8), min = raw.slice(8, 10)
@@ -227,7 +217,6 @@ function PrevRunsModal({ sequenceId, issue, onClose }: { sequenceId: string; iss
         style={{ background: '#fff', borderRadius: 16, width: 640, maxWidth: '100%', maxHeight: '88vh', display: 'flex', flexDirection: 'column', boxShadow: '0 24px 60px rgba(0,0,0,0.2)' }}
         onClick={e => e.stopPropagation()}
       >
-        {/* Header */}
         <div style={{ padding: '18px 22px 14px', borderBottom: '1px solid rgba(0,0,0,0.07)', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexShrink: 0 }}>
           <div>
             <div style={{ fontSize: 16, fontWeight: 600, color: '#0d0d12', marginBottom: 4 }}>{data?.title || 'Run History'}</div>
@@ -235,14 +224,11 @@ function PrevRunsModal({ sequenceId, issue, onClose }: { sequenceId: string; iss
           </div>
           <button onClick={onClose} style={{ width: 30, height: 30, borderRadius: 8, border: '1px solid rgba(0,0,0,0.09)', background: '#fff', cursor: 'pointer', fontSize: 15, color: '#6b6880', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>✕</button>
         </div>
-
-        {/* Body */}
         <div style={{ padding: '18px 22px', overflowY: 'auto', flex: 1 }}>
           {!data ? (
             <div style={{ textAlign: 'center', color: '#a09db8', padding: 30 }}>No run history available for this issue.</div>
           ) : (
             <div style={{ position: 'relative', paddingLeft: 28 }}>
-              {/* vertical line */}
               <div style={{ position: 'absolute', left: 10, top: 0, bottom: 0, width: 2, background: '#e9e4fe', borderRadius: 2 }} />
               {data.runs.map((run, idx) => {
                 const dotColor = run.status === 'Success' ? '#166534' : run.status === 'Partial' ? '#b45309' : '#c0392b'
@@ -253,10 +239,8 @@ function PrevRunsModal({ sequenceId, issue, onClose }: { sequenceId: string; iss
                 const isLatest = idx === 0
                 return (
                   <div key={idx} style={{ position: 'relative', marginBottom: 18 }}>
-                    {/* dot */}
                     <div style={{ position: 'absolute', left: -23, top: 14, width: 14, height: 14, borderRadius: '50%', background: dotColor, border: '2px solid #fff', boxShadow: `0 0 0 2px ${dotColor}`, zIndex: 1 }} />
                     <div style={{ background: '#fff', border: '1px solid rgba(0,0,0,0.07)', borderRadius: 10, padding: '12px 14px' }}>
-                      {/* run header */}
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                           <span style={{ fontSize: 10, fontWeight: 700, color: '#7c5dfa', background: '#ede9ff', padding: '2px 8px', borderRadius: 20 }}>
@@ -266,28 +250,23 @@ function PrevRunsModal({ sequenceId, issue, onClose }: { sequenceId: string; iss
                         </div>
                         <span style={{ fontSize: 11, color: '#a09db8' }}>{run.date}</span>
                       </div>
-                      {/* status + confidence */}
                       <div style={{ display: 'flex', gap: 8, marginBottom: 7, flexWrap: 'wrap', alignItems: 'center' }}>
                         <span style={{ fontSize: 10, fontWeight: 500, padding: '2px 8px', borderRadius: 20, background: run.status === 'Success' ? '#f0fdf4' : run.status === 'Partial' ? '#fff7ed' : '#fff1f1', color: run.status === 'Success' ? '#166534' : run.status === 'Partial' ? '#b45309' : '#c0392b' }}>{run.status}</span>
                         <span style={{ fontSize: 11, color: '#6b6880' }}>Confidence: <strong>{run.confidence}</strong></span>
                       </div>
-                      {/* agents */}
                       <div style={{ fontSize: 11, color: '#6b6880', marginBottom: 5 }}>
                         <strong>Agents ran: </strong>
                         {run.agents.map((a: string, i: number) => (
                           <span key={i} style={{ fontSize: 10, background: '#f0eef8', color: '#7c5dfa', padding: '2px 7px', borderRadius: 20, marginRight: 4 }}>{a}</span>
                         ))}
                       </div>
-                      {/* evidence */}
                       <div style={{ fontSize: 11, color: '#6b6880', marginBottom: 5 }}><strong>Evidence: </strong>{run.evidence}</div>
-                      {/* impacted */}
                       <div style={{ fontSize: 11, color: '#6b6880', marginBottom: 7 }}>
                         <strong>Impacted: </strong>
                         {run.impacted.map((f: string, i: number) => (
                           <span key={i} style={{ fontSize: 10, background: '#f4f3f8', color: '#6b6880', padding: '2px 7px', borderRadius: 20, marginRight: 4 }}>{f}</span>
                         ))}
                       </div>
-                      {/* action taken */}
                       <div style={{ display: 'flex', alignItems: 'flex-start', gap: 6, padding: '7px 10px', borderRadius: 8, background: acBg, border: `1px solid ${acBorder}` }}>
                         <span style={{ fontSize: 14 }}>{acIcon}</span>
                         <div>
@@ -350,7 +329,6 @@ function IssueModal({ issue, onClose, onStatusChange }: { issue: Issue; onClose:
   const [toast, setToast] = useState<{ msg: string; type: 'success' | 'info' | 'error' } | null>(null)
   const [saving, setSaving] = useState(false)
 
-  // ── Keyboard shortcuts ──
   useEffect(() => {
     function handleKey(e: KeyboardEvent) {
       if (e.target instanceof HTMLTextAreaElement) return
@@ -363,7 +341,6 @@ function IssueModal({ issue, onClose, onStatusChange }: { issue: Issue; onClose:
     return () => window.removeEventListener('keydown', handleKey)
   }, [resolved, fpDone, showFpForm, saving])
 
-  // Map impacted_fields keys to our field keys for matching
   const impactedSet = new Set(
     (Array.isArray(issue.impacted_fields) ? issue.impacted_fields : [])
       .map((f: string) => f.toLowerCase().trim())
@@ -372,19 +349,20 @@ function IssueModal({ issue, onClose, onStatusChange }: { issue: Issue; onClose:
 
   const recordAId = issue.provider_id_a || 'Record A'
   const recordBId = issue.provider_id_b || 'Record B'
+  const isDuplicate = issue.issue_type === 'DUPLICATE_RECORD'
 
   const allFields = [
-    { field: 'NPI',            a: String(issue.provider_npi  || issue.npi || 'N/A'), b: 'N/A', impacted: isImpacted('npi', 'provider_npi') },
-    { field: 'TIN',            a: issue.provider_tin           || 'N/A',             b: 'N/A', impacted: isImpacted('tin', 'provider_tin', 'fedid') },
-    { field: 'Address',        a: issue.provider_address       || 'N/A',             b: 'N/A', impacted: isImpacted('address', 'provider_address') },
-    { field: 'Specialty',      a: issue.provider_specialty || issue.specialty || 'N/A', b: 'N/A', impacted: isImpacted('specialty', 'provider_specialty') },
-    { field: 'Active Status',  a: issue.provider_active_status || 'N/A',             b: 'N/A', impacted: isImpacted('active_status', 'provider_active_status', 'status') },
-    { field: 'Phone',          a: issue.provider_phone         || 'N/A',             b: 'N/A', impacted: isImpacted('phone', 'provider_phone') },
-    { field: 'Taxonomy',       a: issue.provider_taxonomy      || 'N/A',             b: 'N/A', impacted: isImpacted('taxonomy', 'provider_taxonomy') },
-    { field: 'Network',        a: issue.provider_network       || 'N/A',             b: 'N/A', impacted: isImpacted('network', 'provider_network') },
-    { field: 'Contract Start', a: issue.provider_contract_start|| 'N/A',             b: 'N/A', impacted: isImpacted('contract_start', 'provider_contract_start') },
-    { field: 'Provider Type',  a: issue.provider_type          || 'N/A',             b: 'N/A', impacted: isImpacted('type', 'provider_type', 'provtype') },
-    { field: 'Billing NPI',    a: issue.provider_billing_npi   || 'N/A',             b: 'N/A', impacted: isImpacted('billing_npi', 'provider_billing_npi') },
+    { field: 'NPI',           a: String(issue.provider_npi || issue.npi || 'N/A'),        b: issue.record_b_npi != null ? String(issue.record_b_npi) : 'N/A', impacted: isImpacted('npi', 'provider_npi') },
+    { field: 'TIN',           a: issue.provider_tin           || 'N/A',                   b: issue.record_b_tin           || 'N/A', impacted: isImpacted('tin', 'provider_tin', 'fedid') },
+    { field: 'Address',       a: issue.provider_address       || 'N/A',                   b: issue.record_b_address       || 'N/A', impacted: isImpacted('address', 'provider_address') },
+    { field: 'Specialty',     a: issue.provider_specialty || issue.specialty || 'N/A',    b: issue.record_b_specialty     || 'N/A', impacted: isImpacted('specialty', 'provider_specialty') },
+    { field: 'Active Status', a: issue.provider_active_status || 'N/A',                   b: issue.record_b_active_status || 'N/A', impacted: isImpacted('active_status', 'provider_active_status', 'status') },
+    { field: 'Phone',         a: issue.provider_phone         || 'N/A',                   b: 'N/A', impacted: isImpacted('phone', 'provider_phone') },
+    { field: 'Taxonomy',      a: issue.provider_taxonomy      || 'N/A',                   b: 'N/A', impacted: isImpacted('taxonomy', 'provider_taxonomy') },
+    { field: 'Network',       a: issue.provider_network       || 'N/A',                   b: 'N/A', impacted: isImpacted('network', 'provider_network') },
+    { field: 'Contract Start',a: issue.provider_contract_start|| 'N/A',                   b: 'N/A', impacted: isImpacted('contract_start', 'provider_contract_start') },
+    { field: 'Provider Type', a: issue.provider_type          || 'N/A',                   b: 'N/A', impacted: isImpacted('type', 'provider_type', 'provtype') },
+    { field: 'Billing NPI',   a: issue.provider_billing_npi   || 'N/A',                   b: 'N/A', impacted: isImpacted('billing_npi', 'provider_billing_npi') },
   ]
 
   const visibleFields = expanded ? allFields : allFields.slice(0, 5)
@@ -416,10 +394,7 @@ function IssueModal({ issue, onClose, onStatusChange }: { issue: Issue; onClose:
   }
 
   async function handleFpSubmit() {
-    if (!fpReason.trim()) {
-      setFpError(true)
-      return
-    }
+    if (!fpReason.trim()) { setFpError(true); return }
     setFpError(false)
     setSaving(true)
     try {
@@ -451,7 +426,6 @@ function IssueModal({ issue, onClose, onStatusChange }: { issue: Issue; onClose:
         style={{ background: '#fff', borderRadius: 16, width: 700, maxWidth: '100%', maxHeight: '90vh', display: 'flex', flexDirection: 'column', boxShadow: '0 24px 60px rgba(0,0,0,0.2)' }}
         onClick={e => e.stopPropagation()}
       >
-        {/* Modal Header */}
         <div style={{ padding: '18px 22px 14px', borderBottom: '1px solid rgba(0,0,0,0.07)', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', flexShrink: 0 }}>
           <div>
             <div style={{ fontSize: 17, fontWeight: 600, color: '#0d0d12', marginBottom: 6 }}>{issue.sequence_id.split('-').slice(-2).join('-')} — {issue.provider}</div>
@@ -465,10 +439,7 @@ function IssueModal({ issue, onClose, onStatusChange }: { issue: Issue; onClose:
           <button onClick={onClose} style={{ width: 32, height: 32, borderRadius: 8, border: '1px solid rgba(0,0,0,0.09)', background: '#fff', cursor: 'pointer', fontSize: 16, color: '#6b6880', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginLeft: 12 }}>✕</button>
         </div>
 
-        {/* Modal Body */}
         <div style={{ padding: '18px 22px', overflowY: 'auto', flex: 1 }}>
-
-          {/* AI Recommendation */}
           <div style={{ background: 'linear-gradient(135deg,#f5f2ff,#faf8ff)', border: '1px solid rgba(124,93,250,0.2)', borderRadius: 12, padding: '16px 18px', marginBottom: 14 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
               <div style={{ width: 26, height: 26, background: '#7c5dfa', borderRadius: 7, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: 14 }}>✦</div>
@@ -511,7 +482,6 @@ function IssueModal({ issue, onClose, onStatusChange }: { issue: Issue; onClose:
             </div>
           </div>
 
-          {/* Evidence Table */}
           <div style={{ marginBottom: 14 }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
               <div style={{ fontSize: 12, fontWeight: 600, color: '#0d0d12' }}>Field comparison — evidence</div>
@@ -524,7 +494,7 @@ function IssueModal({ issue, onClose, onStatusChange }: { issue: Issue; onClose:
                 <tr style={{ background: '#f8f7fc' }}>
                   <th style={{ padding: '9px 12px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#6b6880', width: 120 }}>Field</th>
                   <th style={{ padding: '9px 12px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#6b6880' }}>{recordAId} <span style={{ fontWeight: 400, color: '#a09db8' }}>(live)</span></th>
-                  <th style={{ padding: '9px 12px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#6b6880' }}>{recordBId} <span style={{ fontWeight: 400, color: '#a09db8' }}>(not stored)</span></th>
+                  {isDuplicate && <th style={{ padding: '9px 12px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#6b6880' }}>{recordBId} <span style={{ fontWeight: 400, color: '#a09db8' }}>(duplicate)</span></th>}
                   <th style={{ padding: '9px 12px', textAlign: 'center', fontSize: 11, fontWeight: 600, color: '#6b6880', width: 90 }}>Status</th>
                 </tr>
               </thead>
@@ -533,7 +503,7 @@ function IssueModal({ issue, onClose, onStatusChange }: { issue: Issue; onClose:
                   <tr key={row.field} style={{ borderBottom: '1px solid rgba(0,0,0,0.05)' }}>
                     <td style={{ padding: '9px 12px', color: '#6b6880', fontWeight: 500 }}>{row.field}</td>
                     <td style={{ padding: '9px 12px', background: row.impacted ? '#fff5f5' : '#fff', color: row.impacted ? '#c0392b' : row.a === 'N/A' ? '#a09db8' : '#0d0d12', fontWeight: row.impacted ? 500 : 400, fontStyle: row.a === 'N/A' ? 'italic' : 'normal' }}>{row.a}</td>
-                    <td style={{ padding: '9px 12px', color: '#a09db8', fontStyle: 'italic' }}>{row.b}</td>
+                    {isDuplicate && <td style={{ padding: '9px 12px', color: '#a09db8', fontStyle: 'italic' }}>{row.b}</td>}
                     <td style={{ padding: '9px 12px', textAlign: 'center' }}>
                       {row.impacted
                         ? <Tag label="Impacted" colors="#fff1f1|#c0392b" />
@@ -548,10 +518,7 @@ function IssueModal({ issue, onClose, onStatusChange }: { issue: Issue; onClose:
           </div>
         </div>
 
-        {/* Modal Footer — Review & Action */}
         <div style={{ padding: '14px 22px', borderTop: '1px solid rgba(0,0,0,0.07)', background: '#faf9fe', flexShrink: 0 }}>
-
-          {/* RESOLVED STATE — read only */}
           {resolved ? (
             <div style={{ background: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: 10, padding: '14px 16px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
@@ -561,9 +528,7 @@ function IssueModal({ issue, onClose, onStatusChange }: { issue: Issue; onClose:
               <div style={{ fontSize: 12, color: '#166534' }}>Resolved by <strong>Sandhiya Raja</strong> (Provider OPS Analyst)</div>
               <div style={{ fontSize: 11, color: '#4ade80', marginTop: 3 }}>🕐 {resolvedTime}</div>
             </div>
-
           ) : fpDone ? (
-            /* FALSE POSITIVE DONE STATE — read only */
             <div style={{ background: '#f4f3f8', border: '1px solid #d4d2e0', borderRadius: 10, padding: '14px 16px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
                 <span style={{ fontSize: 18 }}>🚫</span>
@@ -571,9 +536,7 @@ function IssueModal({ issue, onClose, onStatusChange }: { issue: Issue; onClose:
               </div>
               <div style={{ fontSize: 12, color: '#6b6880' }}>By <strong>Sandhiya Raja</strong> — {fpReason}</div>
             </div>
-
           ) : showFpForm ? (
-            /* FALSE POSITIVE REASON FORM */
             <div>
               <div style={{ fontSize: 12, fontWeight: 600, color: '#0d0d12', marginBottom: 8 }}>Review & Action — Reason required</div>
               <textarea
@@ -590,9 +553,7 @@ function IssueModal({ issue, onClose, onStatusChange }: { issue: Issue; onClose:
                 <button onClick={() => { setShowFpForm(false); setFpError(false) }} disabled={saving} style={{ padding: '8px 14px', background: '#fff', color: '#6b6880', border: '1px solid rgba(0,0,0,0.09)', borderRadius: 8, fontSize: 12, cursor: saving ? 'default' : 'pointer' }}>Cancel</button>
               </div>
             </div>
-
           ) : (
-            /* DEFAULT ACTION STATE */
             <div>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
                 <div style={{ fontSize: 12, fontWeight: 600, color: '#0d0d12' }}>Review & Action</div>
@@ -612,7 +573,6 @@ function IssueModal({ issue, onClose, onStatusChange }: { issue: Issue; onClose:
           )}
         </div>
       </div>
-      {/* Toast */}
       {toast && <Toast msg={toast.msg} type={toast.type} onDone={() => setToast(null)} />}
       <style>{`@keyframes slideIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }`}</style>
     </div>
@@ -635,30 +595,35 @@ export default function WorkQueue() {
   const [searchParams] = useSearchParams()
   const [prevRunsId, setPrevRunsId] = useState<{ id: string; issue: Issue } | null>(null)
 
-  // Fetch issues from API
+  // Fetch issues from API — polls every 30 seconds
   useEffect(() => {
+    function loadIssues() {
+      fetch(`${API}/api/findings`)
+        .then(r => r.json())
+        .then(data => {
+          const normalized = data.map((i: any) => ({
+            ...i,
+            impacted_fields: Array.isArray(i.impacted_fields)
+              ? i.impacted_fields
+              : typeof i.impacted_fields === 'string'
+                ? (() => { try { return JSON.parse(i.impacted_fields) } catch { return i.impacted_fields.split(',') } })()
+                : [],
+          }))
+          setIssues(normalized)
+          const total = normalized.length
+          const ops   = normalized.filter((i: any) => i.queue_name === 'PROVIDER_OPS').length
+          const dir   = normalized.filter((i: any) => i.queue_name === 'DIRECTORY_OPS').length
+          const comp  = normalized.filter((i: any) => i.queue_name === 'COMPLIANCE').length
+          setTabs([`All (${total})`, `Provider Ops (${ops})`, `Directory (${dir})`, `Compliance (${comp})`])
+          setLoading(false)
+        })
+        .catch(() => setLoading(false))
+    }
+
     setLoading(true)
-    fetch(`${API}/api/findings`)
-      .then(r => r.json())
-      .then(data => {
-        const normalized = data.map((i: any) => ({
-          ...i,
-          impacted_fields: Array.isArray(i.impacted_fields)
-            ? i.impacted_fields
-            : typeof i.impacted_fields === 'string'
-              ? (() => { try { return JSON.parse(i.impacted_fields) } catch { return i.impacted_fields.split(',') } })()
-              : [],
-        }))
-        setIssues(normalized)
-        // Update tab counts
-        const total    = normalized.length
-        const ops      = normalized.filter((i: any) => i.queue_name === 'PROVIDER_OPS').length
-        const dir      = normalized.filter((i: any) => i.queue_name === 'DIRECTORY_OPS').length
-        const comp     = normalized.filter((i: any) => i.queue_name === 'COMPLIANCE').length
-        setTabs([`All (${total})`, `Provider Ops (${ops})`, `Directory (${dir})`, `Compliance (${comp})`])
-        setLoading(false)
-      })
-      .catch(() => setLoading(false))
+    loadIssues()
+    const interval = setInterval(loadIssues, 30000)
+    return () => clearInterval(interval)
   }, [])
 
   const [statusFilter, setStatusFilter] = useState('All')
@@ -672,12 +637,10 @@ export default function WorkQueue() {
     if (status === 'open') setStatusFilter('Open to Resolve')
   }, [searchParams])
 
-
   function handleStatusChange(sequenceId: string, newStatus: 'Resolved' | 'False Positive') {
     setIssues(prev => prev.map(i => i.sequence_id === sequenceId ? { ...i, status: newStatus } : i))
   }
 
-  // Reset to page 1 whenever filters change
   useEffect(() => { setCurrentPage(1) }, [search, typeFilter, priorityFilter, dateLabel, activeTab, statusFilter, batchFilter])
 
   const filteredIssues = issues.filter(i => {
@@ -701,7 +664,6 @@ export default function WorkQueue() {
       (activeTab.includes('Compliance') && i.queue_name === 'COMPLIANCE')
     return matchSearch && matchType && matchPriority && matchBatch && matchTab && matchDate && matchStatus
   })
-
 
   return (
     <div style={{ flex: 1, overflowY: 'auto', padding: '20px 24px', background: '#f0eef8' }}>
@@ -747,16 +709,10 @@ export default function WorkQueue() {
               onClick={() => setSearch('')}
               style={{ position: 'absolute', right: 8, background: 'none', border: 'none', cursor: 'pointer', color: '#a09db8', fontSize: 14, display: 'flex', alignItems: 'center', justifyContent: 'center', width: 20, height: 20, borderRadius: '50%', padding: 0 }}
               title="Clear search"
-            >
-              ✕
-            </button>
+            >✕</button>
           )}
         </div>
-        <select
-          value={typeFilter}
-          onChange={e => setTypeFilter(e.target.value)}
-          style={{ fontSize: 12, padding: '7px 11px', border: `1px solid ${typeFilter !== 'All types' ? '#7c5dfa' : 'rgba(0,0,0,0.09)'}`, borderRadius: 8, background: typeFilter !== 'All types' ? '#ede9ff' : '#fff', color: typeFilter !== 'All types' ? '#7c5dfa' : '#0d0d12', height: 34, outline: 'none', fontWeight: typeFilter !== 'All types' ? 500 : 400 }}
-        >
+        <select value={typeFilter} onChange={e => setTypeFilter(e.target.value)} style={{ fontSize: 12, padding: '7px 11px', border: `1px solid ${typeFilter !== 'All types' ? '#7c5dfa' : 'rgba(0,0,0,0.09)'}`, borderRadius: 8, background: typeFilter !== 'All types' ? '#ede9ff' : '#fff', color: typeFilter !== 'All types' ? '#7c5dfa' : '#0d0d12', height: 34, outline: 'none', fontWeight: typeFilter !== 'All types' ? 500 : 400 }}>
           <option value="All types">All types</option>
           <option value="DUPLICATE_RECORD">Duplicate</option>
           <option value="CONFLICT_DETECTED">Conflict</option>
@@ -766,18 +722,12 @@ export default function WorkQueue() {
           <option value="MASTER_DATA_QUALITY">Master Data</option>
           <option value="CREDENTIALING_MISMATCH">Credentialing</option>
         </select>
-        <select
-          value={priorityFilter}
-          onChange={e => setPriorityFilter(e.target.value)}
-          style={{ fontSize: 12, padding: '7px 11px', border: `1px solid ${priorityFilter !== 'All priorities' ? '#7c5dfa' : 'rgba(0,0,0,0.09)'}`, borderRadius: 8, background: priorityFilter !== 'All priorities' ? '#ede9ff' : '#fff', color: priorityFilter !== 'All priorities' ? '#7c5dfa' : '#0d0d12', height: 34, outline: 'none', fontWeight: priorityFilter !== 'All priorities' ? 500 : 400 }}
-        >
+        <select value={priorityFilter} onChange={e => setPriorityFilter(e.target.value)} style={{ fontSize: 12, padding: '7px 11px', border: `1px solid ${priorityFilter !== 'All priorities' ? '#7c5dfa' : 'rgba(0,0,0,0.09)'}`, borderRadius: 8, background: priorityFilter !== 'All priorities' ? '#ede9ff' : '#fff', color: priorityFilter !== 'All priorities' ? '#7c5dfa' : '#0d0d12', height: 34, outline: 'none', fontWeight: priorityFilter !== 'All priorities' ? 500 : 400 }}>
           <option value="All priorities">All priorities</option>
           <option value="HIGH">High</option>
           <option value="MEDIUM">Medium</option>
           <option value="LOW">Low</option>
         </select>
-
-        {/* DATE DROPDOWN */}
         <div style={{ position: 'relative' }}>
           <button onClick={() => setShowDateDrop(!showDateDrop)} style={{ padding: '7px 12px', border: '1px solid rgba(0,0,0,0.09)', borderRadius: 8, background: '#fff', fontSize: 12, color: '#6b6880', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 5 }}>
             📅 {dateLabel} ▾
@@ -795,13 +745,11 @@ export default function WorkQueue() {
         </div>
       </div>
 
-      {/* ── VIEW 1: MAIN WORK QUEUE (no batch filter) ── */}
+      {/* ── VIEW 1: MAIN WORK QUEUE ── */}
       {!batchFilter && filteredIssues.length === 0 && !loading && (
         <div style={{ border: '1px solid rgba(0,0,0,0.07)', borderRadius: 12, overflow: 'hidden' }}>
-          <EmptyState
-            search={search} typeFilter={typeFilter} priorityFilter={priorityFilter} dateLabel={dateLabel}
-            onClear={() => { setSearch(''); setTypeFilter('All types'); setPriorityFilter('All priorities'); setDateLabel('All dates') }}
-          />
+          <EmptyState search={search} typeFilter={typeFilter} priorityFilter={priorityFilter} dateLabel={dateLabel}
+            onClear={() => { setSearch(''); setTypeFilter('All types'); setPriorityFilter('All priorities'); setDateLabel('All dates') }} />
         </div>
       )}
       {!batchFilter && filteredIssues.length > 0 && (
@@ -823,7 +771,6 @@ export default function WorkQueue() {
             </thead>
             <tbody>
               {(() => {
-                // Group issues dynamically by date
                 const pagedIssues = filteredIssues.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE)
                 const dateMap: Record<string, Issue[]> = {}
                 pagedIssues.forEach(i => {
@@ -874,7 +821,6 @@ export default function WorkQueue() {
                   )
                 })
               })()}
-
             </tbody>
           </table>
           <div style={{ padding: '10px 18px', borderTop: '1px solid rgba(0,0,0,0.05)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 11, color: '#a09db8' }}>
@@ -890,20 +836,15 @@ export default function WorkQueue() {
         </div>
       )}
 
-      {/* ── VIEW 2: BATCH DETAIL (after clicking Batch ID) ── */}
+      {/* ── VIEW 2: BATCH DETAIL ── */}
       {batchFilter && (
         <div>
-          {/* Back link */}
-          <div
-            onClick={() => setBatchFilter(null)}
-            style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: 12, color: '#6b6880', cursor: 'pointer', marginBottom: 14, padding: '4px 8px', borderRadius: 6 }}
-          >
+          <div onClick={() => setBatchFilter(null)} style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: 12, color: '#6b6880', cursor: 'pointer', marginBottom: 14, padding: '4px 8px', borderRadius: 6 }}>
             ← Back to all issues
           </div>
 
-          {/* Batch summary card */}
           {Array.from(new Set(issues.map(i => i.batchId))).filter(b => b === batchFilter).map(batchId => {
-            const g = { batchId, shortLabel: batchId.replace('PDM_Monitor_', 'PDM-') };
+            const g = { batchId, shortLabel: batchId.replace('PDM_Monitor_', 'PDM-') }
             const batchIssues = issues.filter(i => i.batchId === g.batchId)
             const highCount   = batchIssues.filter(i => i.severity === 'HIGH').length
             const medCount    = batchIssues.filter(i => i.severity === 'MEDIUM').length
@@ -912,7 +853,6 @@ export default function WorkQueue() {
             const agentRun    = null as any
             return (
               <div key={g.batchId} style={{ background: '#fff', border: '1px solid rgba(0,0,0,0.07)', borderRadius: 14, padding: '16px 20px', marginBottom: 14 }}>
-                {/* Top row */}
                 <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 14 }}>
                   <div style={{ width: 38, height: 38, borderRadius: 9, background: '#ede9ff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                     <span style={{ fontSize: 18 }}>📦</span>
@@ -923,18 +863,13 @@ export default function WorkQueue() {
                   </div>
                   <span style={{ fontSize: 11, background: '#f0fdf4', color: '#166534', border: '1px solid #bbf7d0', padding: '4px 12px', borderRadius: 20, fontWeight: 500 }}>✓ Run complete</span>
                 </div>
-
-                {/* Summary sentence */}
                 <div style={{ fontSize: 13, color: '#374151', marginBottom: 14, padding: '10px 14px', background: '#f8f7fc', borderRadius: 9, lineHeight: 1.6 }}>
                   This batch found <strong style={{ color: '#0d0d12' }}>{batchIssues.length} issues</strong>
                   {highCount > 0 && <> — <strong style={{ color: '#dc2626' }}>{highCount} HIGH</strong></>}
                   {medCount > 0  && <>, <strong style={{ color: '#d97706' }}>{medCount} MEDIUM</strong></>}
                   {lowCount > 0  && <>, <strong style={{ color: '#16a34a' }}>{lowCount} LOW</strong></>}
-                  {agentRun && <> — run took <strong style={{ color: '#7c5dfa' }}>{agentRun.duration}</strong></>}
                   {resolvedCnt > 0 && <> · <strong style={{ color: '#16a34a' }}>{resolvedCnt} resolved</strong></>}
                 </div>
-
-                {/* Stat pills row */}
                 <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 6, background: '#fef2f2', border: '1px solid #fecaca', borderRadius: 8, padding: '6px 12px' }}>
                     <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#dc2626' }} />
@@ -958,18 +893,11 @@ export default function WorkQueue() {
                       <span style={{ fontSize: 11, color: '#7c5dfa' }}>duration</span>
                     </div>
                   )}
-                  {agentRun && (
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 6, background: '#f8f7fc', border: '1px solid rgba(0,0,0,0.07)', borderRadius: 8, padding: '6px 12px' }}>
-                      <span style={{ fontSize: 11, color: '#6b6880' }}>Agents:</span>
-                      <span style={{ fontSize: 11, fontWeight: 500, color: '#0d0d12' }}>{agentRun.agentsRan.join(', ')}</span>
-                    </div>
-                  )}
                 </div>
               </div>
             )
           })}
 
-          {/* Issues table with Prev Runs + Start */}
           <div style={{ background: '#fff', border: '1px solid rgba(0,0,0,0.07)', borderRadius: 12, overflow: 'hidden' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 12 }}>
               <thead>
@@ -1014,10 +942,8 @@ export default function WorkQueue() {
               </tbody>
             </table>
             {filteredIssues.length === 0 && (
-              <EmptyState
-                search={search} typeFilter={typeFilter} priorityFilter={priorityFilter} dateLabel={dateLabel}
-                onClear={() => { setSearch(''); setTypeFilter('All types'); setPriorityFilter('All priorities'); setDateLabel('All dates') }}
-              />
+              <EmptyState search={search} typeFilter={typeFilter} priorityFilter={priorityFilter} dateLabel={dateLabel}
+                onClear={() => { setSearch(''); setTypeFilter('All types'); setPriorityFilter('All priorities'); setDateLabel('All dates') }} />
             )}
             <div style={{ padding: '10px 18px', borderTop: '1px solid rgba(0,0,0,0.05)', fontSize: 11, color: '#a09db8' }}>
               Showing {filteredIssues.length} issues in this batch
@@ -1026,11 +952,8 @@ export default function WorkQueue() {
         </div>
       )}
 
-      {/* PREVIOUS RUNS MODAL */}
       {prevRunsId && <PrevRunsModal sequenceId={prevRunsId.id} issue={prevRunsId.issue} onClose={() => setPrevRunsId(null)} />}
 
-
-      {/* MODAL */}
       {selectedIssue && (
         <IssueModal
           issue={selectedIssue}
@@ -1038,12 +961,14 @@ export default function WorkQueue() {
           onStatusChange={(id, status) => handleStatusChange(id, status)}
         />
       )}
-      {/* ── FOOTER ── */}
-      {!loading && <div style={{ borderTop: '1px solid #f1f5f9', padding: '12px 28px', display: 'flex', alignItems: 'center', gap: 16, marginTop: 8 }}>
-        <span style={{ fontSize: 11, color: '#94a3b8' }}>© 2026 ProviderGuard AI</span>
-        <span style={{ color: '#cbd5e1', fontSize: 11 }}>|</span>
-        <span style={{ fontSize: 11, color: '#94a3b8' }}>All outputs are advisory only</span>
-      </div>}
+
+      {!loading && (
+        <div style={{ borderTop: '1px solid #f1f5f9', padding: '12px 28px', display: 'flex', alignItems: 'center', gap: 16, marginTop: 8 }}>
+          <span style={{ fontSize: 11, color: '#94a3b8' }}>© 2026 ProviderGuard AI</span>
+          <span style={{ color: '#cbd5e1', fontSize: 11 }}>|</span>
+          <span style={{ fontSize: 11, color: '#94a3b8' }}>All outputs are advisory only</span>
+        </div>
+      )}
     </div>
   )
 }
