@@ -109,6 +109,7 @@ export default function Dashboard() {
   const issueTypes = (() => {
     const rows = [
       { label: 'Duplicate Record',   count: apiIssues.filter(i => i.issue_type === 'DUPLICATE_RECORD').length,         color: '#6366f1' },
+      { label: 'Master Data Quality',count: apiIssues.filter(i => i.issue_type === 'MASTER_DATA_QUALITY').length,      color: '#8b5cf6' },
       { label: 'Conflict Detected',  count: apiIssues.filter(i => i.issue_type === 'CONFLICT_DETECTED').length,        color: '#ef4444' },
       { label: 'Directory Mismatch', count: apiIssues.filter(i => i.issue_type === 'DIRECTORY_MISMATCH').length,       color: '#0ea5e9' },
       { label: 'Onboarding Gap',     count: apiIssues.filter(i => i.issue_type === 'ONBOARDING_ISSUE').length,         color: '#f59e0b' },
@@ -119,7 +120,7 @@ export default function Dashboard() {
   })()
 
   // Build queue load chart from real issues data
-  const openIssues = apiIssues.filter(i => i.status === 'Open to Resolve')
+  const openIssues = apiIssues.filter(i => i.status === 'Open to Resolve' || i.status === 'OPEN')
   const totalOpen = openIssues.length || 1
   const queues = [
     { label: 'Provider Ops',  count: openIssues.filter(i => i.queue_name === 'PROVIDER_OPS').length,  pct: Math.round((openIssues.filter(i => i.queue_name === 'PROVIDER_OPS').length  / totalOpen) * 100), color: '#6366f1' },
@@ -251,7 +252,7 @@ export default function Dashboard() {
             ))}
             <div style={{ marginTop: 8, padding: '10px 14px', background: '#f5f8ff', borderRadius: 10, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <span style={{ fontSize: 11, color: '#6b6880' }}>Total issues</span>
-              <span style={{ fontSize: 14, fontWeight: 700, color: '#6366f1' }}>{apiSummary ? (apiSummary.open ?? apiSummary.total_open ?? '—') : '—'}</span>
+              <span style={{ fontSize: 14, fontWeight: 700, color: '#6366f1' }}>{openIssues.length || '—'}</span>
             </div>
           </div>
         </div>

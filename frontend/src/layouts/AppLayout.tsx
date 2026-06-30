@@ -1,25 +1,16 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { currentUser, mockIssues } from '../data/mockData'
+import { currentUser } from '../data/mockData'
 import { Bell, Shield } from 'lucide-react'
 
 const navItems = [
   { label: 'Dashboard',    icon: '⊞', path: '/',      badge: 0,  desc: 'Monitor your provider issues at a glance' },
-  { label: 'Work Queue',   icon: '≡', path: '/queue',  badge: 41, desc: 'Manage and resolve open provider issues' },
+  { label: 'Work Queue',   icon: '≡', path: '/queue',  badge: 0,  desc: 'Manage and resolve open provider issues' },
   { label: 'Audit Trail',  icon: '◷', path: '/audit',  badge: 0,  desc: 'Track all actions and changes' },
   { label: 'Admin Config', icon: '⚙', path: '/admin',  badge: 0,  desc: 'Configure system settings and agents' },
 ]
 
-const alerts = mockIssues
-  .filter(i => i.status === 'Open to Resolve')
-  .slice(0, 5)
-  .map(i => ({
-    id: i.sequence_id,
-    title: `${i.issue_type.replace(/_/g, ' ')} detected`,
-    provider: i.provider,
-    severity: i.severity,
-    time: new Date(i.detectedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-  }))
+// alerts will be loaded from live API
 
 const severityColor: Record<string, string> = {
   HIGH:   '#dc2626',
@@ -31,13 +22,34 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   const navigate = useNavigate()
   const location = useLocation()
   const [showNotif, setShowNotif] = useState(false)
-  const [unreadCount, setUnreadCount] = useState(alerts.length)
+  const [unreadCount, setUnreadCount] = useState(0)
   const [readIds, setReadIds] = useState<Set<string>>(new Set())
   const [hoveredNav, setHoveredNav] = useState<string | null>(null)
   const bellRef = useRef<HTMLDivElement>(null)
   const userRef = useRef<HTMLDivElement>(null)
   const [showUser, setShowUser] = useState(false)
   const darkMode = false
+  const [openCount, setOpenCount] = useState(0)
+  const [alerts, setAlerts] = useState<{ id: string; title: string; provider: string; severity: string; time: string }[]>([])
+
+  useEffect(() => {
+    // Fetch live open issues for notifications + badge count
+    fetch('http://localhost:3001/api/findings')
+      .then(r => r.json())
+      .then(data => {
+        const open = Array.isArray(data) ? data.filter((i: any) => i.status === 'Open to Resolve' || i.status === 'OPEN') : []
+        setOpenCount(open.length)
+        setUnreadCount(Math.min(open.length, 5))
+        setAlerts(open.slice(0, 5).map((i: any) => ({
+          id: i.sequence_id,
+          title: `${(i.issue_type || '').replace(/_/g, ' ')} detected`,
+          provider: i.provider || i.provider_name || 'Unknown',
+          severity: i.severity || 'LOW',
+          time: new Date(i.detectedAt || i.detected_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        })))
+      })
+      .catch(() => {})
+  }, [])
 
   useEffect(() => {
     localStorage.setItem('pg-theme', darkMode ? 'dark' : 'light')
@@ -122,7 +134,11 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                 }}>
                   <span style={{ fontSize: 16 }}>{item.icon}</span>
                   <span>{item.label}</span>
-                  {item.badge > 0 && (
+                  {item.label === 'Work Queue' && openCount > 0 ? (
+                    <span style={{ background: '#dc2626', color: '#fff', fontSize: 10, fontWeight: 700, padding: '2px 7px', borderRadius: 20 }}>
+                      {openCount}
+                    </span>
+                  ) : item.badge > 0 && (
                     <span style={{ background: '#dc2626', color: '#fff', fontSize: 10, fontWeight: 700, padding: '2px 7px', borderRadius: 20 }}>
                       {item.badge}
                     </span>
