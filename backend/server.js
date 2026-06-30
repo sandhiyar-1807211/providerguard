@@ -35,6 +35,4 @@ app.use('/api/audit',    auditRouter)
 app.use('/api/agent',    agentRouter)
 
 app.listen(PORT, () => {
-  console.log(`ProviderGuard API running on http://localhost:${PORT}`)
-  console.log(`Schema: ${process.env.DB_SCHEMA}`)
-})
+  console.log(`ProviderGuard API runni

@@ -83,8 +83,23 @@ export default function Dashboard() {
   const [agentToast, setAgentToast] = useState<{ msg: string; ok: boolean } | null>(null)
 
   async function handleRunAgent() {
-    setAgentToast({ msg: '⚙ Agent trigger pending Azure AD setup. Contact agent developer for HTTP trigger URL.', ok: false })
-    setTimeout(() => setAgentToast(null), 5000)
+    setAgentRunning(true)
+    setAgentToast(null)
+    try {
+      const res = await fetch(`${API}/api/agent/trigger`, { method: 'POST' })
+      const data = await res.json()
+      if (res.ok && data.success) {
+        const batchMsg = data.batchId ? ` — Batch ${data.batchId}` : ''
+        setAgentToast({ msg: `✓ Agent running${batchMsg} — new results will appear shortly.`, ok: true })
+      } else {
+        setAgentToast({ msg: `⚠ Agent returned an error: ${data.error || res.status}`, ok: false })
+      }
+    } catch (err) {
+      setAgentToast({ msg: '✕ Could not reach the agent. Check backend is running.', ok: false })
+    } finally {
+      setAgentRunning(false)
+      setTimeout(() => setAgentToast(null), 6000)
+    }
   }
 
   useEffect(() => {
@@ -148,9 +163,10 @@ export default function Dashboard() {
           </div>
           <button
             onClick={handleRunAgent}
-            style={{ padding: '9px 20px', background: '#6366f1', color: '#fff', border: 'none', borderRadius: 10, fontSize: 12, fontWeight: 600, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6 }}
+            disabled={agentRunning}
+            style={{ padding: '9px 20px', background: agentRunning ? '#a5b4fc' : '#6366f1', color: '#fff', border: 'none', borderRadius: 10, fontSize: 12, fontWeight: 600, cursor: agentRunning ? 'default' : 'pointer', display: 'flex', alignItems: 'center', gap: 6 }}
           >
-            ▶ Run agents
+            {agentRunning ? '⟳ Running…' : '▶ Run agents'}
           </button>
         </div>
 
