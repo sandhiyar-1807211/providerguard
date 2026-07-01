@@ -35,4 +35,10 @@ app.use('/api/audit',    auditRouter)
 app.use('/api/agent',    agentRouter)
 
 app.listen(PORT, () => {
-  console.log(`ProviderGuard API runni
+  console.log(`ProviderGuard API running on http://localhost:${PORT}`)
+  console.log('Schema:', process.env.DB_SCHEMA || 'MarketPlace_Agent_HandOff')
+
+  // Pre-authenticate with Azure AD on startup so the device code prompt
+  // appears immediately in the terminal, not when the user clicks "Run Agents"
+  agentRouter.warmupAuth()
+})
