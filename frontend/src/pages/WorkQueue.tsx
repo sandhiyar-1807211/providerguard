@@ -3,7 +3,7 @@ import { useSearchParams, useNavigate } from 'react-router-dom'
 import type { Issue } from '../types'
 import { QUEUE_LABELS, ISSUE_TYPE_LABELS, SEVERITY_LABELS } from '../types'
 
-const API = 'http://localhost:3001'
+const API = 'http://localhost:3003'
 
 const typeColors: Record<string, string> = {
   'DUPLICATE_RECORD':        '#faf5ff|#6d28d9',
@@ -371,7 +371,7 @@ function IssueModal({ issue, onClose, onStatusChange }: { issue: Issue; onClose:
   async function handleAccept() {
     setSaving(true)
     try {
-      await fetch(`${API}/api/findings/${encodeURIComponent(issue.sequence_id)}/resolve`, {
+      await fetch(`${API}/api/findings/${encodeURIComponent(issue.sequence_id)}/resolve`, { credentials: 'include',
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -398,7 +398,7 @@ function IssueModal({ issue, onClose, onStatusChange }: { issue: Issue; onClose:
     setFpError(false)
     setSaving(true)
     try {
-      await fetch(`${API}/api/findings/${encodeURIComponent(issue.sequence_id)}/resolve`, {
+      await fetch(`${API}/api/findings/${encodeURIComponent(issue.sequence_id)}/resolve`, { credentials: 'include',
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -598,7 +598,7 @@ export default function WorkQueue() {
   // Fetch issues from API — polls every 30 seconds
   useEffect(() => {
     function loadIssues() {
-      fetch(`${API}/api/findings`)
+      fetch(`${API}/api/findings`, { credentials: 'include' })
         .then(r => r.json())
         .then(data => {
           const normalized = data.map((i: any) => ({

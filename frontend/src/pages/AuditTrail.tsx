@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-const API = 'http://localhost:3001'
+const API = 'http://localhost:3003'
 
 const iconMap: Record<string, { bg: string; color: string; icon: string }> = {
   accept:  { bg: '#f0fdf4', color: '#166534', icon: '✓' },
@@ -94,7 +94,7 @@ export default function AuditTrail() {
     if (search) params.set('search', search)
     if (filterAction !== 'All actions') params.set('action', filterAction)
 
-    fetch(`${API}/api/audit?${params}`)
+    fetch(`${API}/api/audit?${params}`, { credentials: 'include' })
       .then(r => r.json())
       .then(data => {
         setLogs(Array.isArray(data) ? data : [])

@@ -123,7 +123,8 @@ export function normalizeSeverity(s: string): Priority {
 }
 
 // Helper to normalize impacted_fields — agent returns string or array
-export function normalizeFields(fields: string[] | string): string[] {
+export function normalizeFields(fields: string | string[] | null | undefined): string[] {
+  if (!fields) return []
   if (Array.isArray(fields)) return fields
-  return fields.split(',').map(f => f.trim())
+  try { return JSON.parse(fields) } catch { return [fields] }
 }

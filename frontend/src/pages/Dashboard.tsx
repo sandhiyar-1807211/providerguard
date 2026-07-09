@@ -1,10 +1,10 @@
 import { useNavigate } from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react'
 import { TrendingDown, ClipboardList, Clock, CheckCheck } from 'lucide-react'
-import { currentUser } from '../data/mockData'
+import { useWindowsUser } from '../hooks/useWindowsUser'
 import { ISSUE_TYPE_LABELS, SEVERITY_LABELS, QUEUE_LABELS } from '../types'
 
-const API = 'http://localhost:3001'
+const API = 'http://localhost:3003'
 
 // Count-up animation hook
 function useCountUp(target: number, duration = 1200) {
@@ -78,6 +78,7 @@ export default function Dashboard() {
   const [apiIssues, setApiIssues] = useState<any[]>([])
   const [apiBatches, setApiBatches] = useState<any[]>([])
   const [apiSummary, setApiSummary] = useState<any>(null)
+  const currentUser = useWindowsUser()
   const [dashLoading, setDashLoading] = useState(true)
   const [agentRunning, setAgentRunning] = useState(false)
   const [agentToast, setAgentToast] = useState<{ msg: string; ok: boolean } | null>(null)
@@ -86,7 +87,7 @@ export default function Dashboard() {
     setAgentRunning(true)
     setAgentToast(null)
     try {
-      const res = await fetch(`${API}/api/agent/trigger`, { method: 'POST' })
+      const res = await fetch(`${API}/api/agent/trigger`, { method: 'POST', credentials: 'include' })
       const data = await res.json()
       if (res.ok && data.success) {
         const batchMsg = data.batchId ? ` — Batch ${data.batchId}` : ''
@@ -104,9 +105,9 @@ export default function Dashboard() {
 
   useEffect(() => {
     Promise.all([
-      fetch(`${API}/api/findings`).then(r => r.json()),
-      fetch(`${API}/api/batches`).then(r => r.json()),
-      fetch(`${API}/api/findings/summary`).then(r => r.json()),
+      fetch(`${API}/api/findings`, { credentials: 'include' }).then(r => r.json()),
+      fetch(`${API}/api/batches`, { credentials: 'include' }).then(r => r.json()),
+      fetch(`${API}/api/findings/summary`, { credentials: 'include' }).then(r => r.json()),
     ]).then(([issues, batches, summary]) => {
       setApiIssues(Array.isArray(issues) ? issues : [])
       setApiBatches(Array.isArray(batches) ? batches : [])
@@ -175,7 +176,7 @@ export default function Dashboard() {
           {[
             { val: dashLoading ? '—' : (apiSummary?.open ?? 0), lbl: 'Assigned to me', Icon: ClipboardList, color: '#3730a3', iconBg: '#eef2ff', border: '#e0e7ff', bg: '#f5f2ff' },
             { val: dashLoading ? '—' : (apiSummary?.resolved ?? 0), lbl: 'Resolved today', Icon: CheckCheck, color: '#16a34a', iconBg: '#f0fdf4', border: '#bbf7d0', bg: '#f0fdf4' },
-            { val: dashLoading ? '—' : currentUser.pendingOver24h, lbl: 'Pending >24h', Icon: Clock, color: '#d97706', iconBg: '#fffbeb', border: '#fde68a', bg: '#fffbeb' },
+            { val: dashLoading ? '—' : (apiSummary?.pendingOver24h ?? 0), lbl: 'Pending >24h', Icon: Clock, color: '#d97706', iconBg: '#fffbeb', border: '#fde68a', bg: '#fffbeb' },
             { val: apiSummary ? `${fpRate}%` : '—',  lbl: 'False positive rate', Icon: TrendingDown,  color: '#dc2626', iconBg: '#fef2f2', border: '#fecaca', bg: '#fef2f2' },
           ].map(s => (
             <div key={s.lbl} className="pg-card" style={{ background: '#fff', borderRadius: 14, padding: '18px 20px', border: `1px solid ${s.border}`, position: 'relative', overflow: 'hidden' }}>

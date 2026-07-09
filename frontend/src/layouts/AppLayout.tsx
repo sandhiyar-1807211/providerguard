@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { currentUser } from '../data/mockData'
+import { useWindowsUser } from '../hooks/useWindowsUser'
 import { Bell, Shield } from 'lucide-react'
 
 const navItems = [
@@ -28,13 +28,14 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   const bellRef = useRef<HTMLDivElement>(null)
   const userRef = useRef<HTMLDivElement>(null)
   const [showUser, setShowUser] = useState(false)
+  const currentUser = useWindowsUser()
   const darkMode = false
   const [openCount, setOpenCount] = useState(0)
   const [alerts, setAlerts] = useState<{ id: string; title: string; provider: string; severity: string; time: string }[]>([])
 
   useEffect(() => {
     // Fetch live open issues for notifications + badge count
-    fetch('http://localhost:3001/api/findings')
+    fetch('http://localhost:3003/api/findings', { credentials: 'include' })
       .then(r => r.json())
       .then(data => {
         const open = Array.isArray(data) ? data.filter((i: any) => i.status === 'Open to Resolve' || i.status === 'OPEN') : []
@@ -256,7 +257,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                 {/* Profile section */}
                 <div style={{ padding: '16px 16px 14px' }}>
                   <div style={{ fontSize: 14, fontWeight: 700, color: '#1e1b4b', marginBottom: 3 }}>{currentUser.name}</div>
-                  <div style={{ fontSize: 12, color: '#9ca3af', marginBottom: 12 }}>sandhiyar@infinite.com</div>
+                  <div style={{ fontSize: 12, color: '#9ca3af', marginBottom: 12 }}>{`${currentUser.username}@infinite.com`}</div>
 
                 </div>
 
