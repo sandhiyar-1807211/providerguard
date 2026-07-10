@@ -10,7 +10,7 @@ const typeColors: Record<string, string> = {
   'CONFLICT_DETECTED':       '#fff7ed|#b45309',
   'DIRECTORY_MISMATCH':      '#f0fdfa|#0f766e',
   'CLAIMS_ACTIVITY_MISMATCH':'#eff6ff|#1d4ed8',
-  'ONBOARDING_ISSUE':        '#f0fdf4|#166534',
+  'ONBOARDING_ISSUE':        '#F0FAF4|#15693B',
   'CREDENTIALING_MISMATCH':  '#fdf4ff|#86198f',
   'NETWORK_CONTRACT_MISMATCH':'#fff7ed|#c2410c',
   'ENROLLMENT_MISMATCH':     '#fefce8|#854d0e',
@@ -18,14 +18,14 @@ const typeColors: Record<string, string> = {
   'ENCOUNTER_MISMATCH':      '#f0fdfa|#0f766e',
 }
 const priColors: Record<string, string> = {
-  'HIGH':   '#fff1f1|#c0392b',
+  'HIGH':   '#fff1f1|#D5493A',
   'MEDIUM': '#fff7ed|#b45309',
-  'LOW':    '#f4f3f8|#6b6880',
+  'LOW':    '#F4F6FA|#565B66',
 }
 const statusColors: Record<string, string> = {
   'Open to Resolve': '#fff7ed|#b45309',
-  'Resolved':        '#f0fdf4|#166534',
-  'False Positive':  '#f4f3f8|#6b6880',
+  'Resolved':        '#F0FAF4|#15693B',
+  'False Positive':  '#F4F6FA|#565B66',
 }
 
 const statusDisplayLabel: Record<string, string> = {
@@ -71,34 +71,34 @@ function EmptyState({ search, typeFilter, priorityFilter, dateLabel, onClear }: 
   return (
     <div style={{ padding: '52px 24px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: '#fff' }}>
       <svg width="120" height="100" viewBox="0 0 120 100" fill="none" style={{ marginBottom: 20 }}>
-        <rect x="10" y="20" width="100" height="70" rx="10" fill="#f5f2ff" stroke="#e0d9ff" strokeWidth="1.5"/>
+        <rect x="10" y="20" width="100" height="70" rx="10" fill="#F4F6FA" stroke="#e0d9ff" strokeWidth="1.5"/>
         <rect x="22" y="34" width="60" height="7" rx="3.5" fill="#ddd6fe"/>
-        <rect x="22" y="47" width="45" height="7" rx="3.5" fill="#ede9ff"/>
-        <rect x="22" y="60" width="52" height="7" rx="3.5" fill="#ede9ff"/>
+        <rect x="22" y="47" width="45" height="7" rx="3.5" fill="#E6ECFA"/>
+        <rect x="22" y="60" width="52" height="7" rx="3.5" fill="#E6ECFA"/>
         <circle cx="93" cy="30" r="18" fill="#fff" stroke="#e0d9ff" strokeWidth="1.5"/>
-        <path d="M86 30 Q93 22 100 30" stroke="#7c5dfa" strokeWidth="2" strokeLinecap="round" fill="none"/>
-        <circle cx="90" cy="33" r="1.5" fill="#7c5dfa"/>
-        <circle cx="96" cy="33" r="1.5" fill="#7c5dfa"/>
-        <line x1="105" y1="43" x2="113" y2="51" stroke="#7c5dfa" strokeWidth="2.5" strokeLinecap="round"/>
+        <path d="M86 30 Q93 22 100 30" stroke="#1F3A93" strokeWidth="2" strokeLinecap="round" fill="none"/>
+        <circle cx="90" cy="33" r="1.5" fill="#1F3A93"/>
+        <circle cx="96" cy="33" r="1.5" fill="#1F3A93"/>
+        <line x1="105" y1="43" x2="113" y2="51" stroke="#1F3A93" strokeWidth="2.5" strokeLinecap="round"/>
       </svg>
-      <div style={{ fontSize: 15, fontWeight: 600, color: '#0d0d12', marginBottom: 8 }}>No issues found</div>
-      <div style={{ fontSize: 13, color: '#6b6880', textAlign: 'center', maxWidth: 320, lineHeight: 1.6, marginBottom: 16 }}>
+      <div style={{ fontSize: 15, fontWeight: 600, color: '#12141A', marginBottom: 8 }}>No issues found</div>
+      <div style={{ fontSize: 13, color: '#565B66', textAlign: 'center', maxWidth: 320, lineHeight: 1.6, marginBottom: 16 }}>
         {hasFilter
           ? 'No issues match your current filters. Try adjusting the search or filter criteria.'
           : 'All issues have been resolved. Great work!'}
       </div>
       {hasFilter && (
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', justifyContent: 'center', marginBottom: 16 }}>
-          {search && <span style={{ fontSize: 11, background: '#ede9ff', color: '#7c5dfa', padding: '3px 10px', borderRadius: 20, fontWeight: 500 }}>Search: "{search}"</span>}
-          {typeFilter !== 'All types' && <span style={{ fontSize: 11, background: '#ede9ff', color: '#7c5dfa', padding: '3px 10px', borderRadius: 20, fontWeight: 500 }}>{typeFilter}</span>}
-          {priorityFilter !== 'All priorities' && <span style={{ fontSize: 11, background: '#ede9ff', color: '#7c5dfa', padding: '3px 10px', borderRadius: 20, fontWeight: 500 }}>{priorityFilter}</span>}
-          {dateLabel !== 'All dates' && <span style={{ fontSize: 11, background: '#ede9ff', color: '#7c5dfa', padding: '3px 10px', borderRadius: 20, fontWeight: 500 }}>{dateLabel}</span>}
+          {search && <span style={{ fontSize: 11, background: '#E6ECFA', color: '#1F3A93', padding: '3px 10px', borderRadius: 20, fontWeight: 500 }}>Search: "{search}"</span>}
+          {typeFilter !== 'All types' && <span style={{ fontSize: 11, background: '#E6ECFA', color: '#1F3A93', padding: '3px 10px', borderRadius: 20, fontWeight: 500 }}>{typeFilter}</span>}
+          {priorityFilter !== 'All priorities' && <span style={{ fontSize: 11, background: '#E6ECFA', color: '#1F3A93', padding: '3px 10px', borderRadius: 20, fontWeight: 500 }}>{priorityFilter}</span>}
+          {dateLabel !== 'All dates' && <span style={{ fontSize: 11, background: '#E6ECFA', color: '#1F3A93', padding: '3px 10px', borderRadius: 20, fontWeight: 500 }}>{dateLabel}</span>}
         </div>
       )}
       {hasFilter && (
         <button
           onClick={onClear}
-          style={{ padding: '8px 20px', background: '#7c5dfa', color: '#fff', border: 'none', borderRadius: 8, fontSize: 12, fontWeight: 500, cursor: 'pointer' }}
+          style={{ padding: '8px 20px', background: '#1F3A93', color: '#fff', border: 'none', borderRadius: 8, fontSize: 12, fontWeight: 500, cursor: 'pointer' }}
         >
           Clear all filters
         </button>
@@ -219,22 +219,22 @@ function PrevRunsModal({ sequenceId, issue, onClose }: { sequenceId: string; iss
       >
         <div style={{ padding: '18px 22px 14px', borderBottom: '1px solid rgba(0,0,0,0.07)', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexShrink: 0 }}>
           <div>
-            <div style={{ fontSize: 16, fontWeight: 600, color: '#0d0d12', marginBottom: 4 }}>{data?.title || 'Run History'}</div>
-            <div style={{ fontSize: 12, color: '#6b6880' }}>{data?.sub || sequenceId}</div>
+            <div style={{ fontSize: 16, fontWeight: 600, color: '#12141A', marginBottom: 4 }}>{data?.title || 'Run History'}</div>
+            <div style={{ fontSize: 12, color: '#565B66' }}>{data?.sub || sequenceId}</div>
           </div>
-          <button onClick={onClose} style={{ width: 30, height: 30, borderRadius: 8, border: '1px solid rgba(0,0,0,0.09)', background: '#fff', cursor: 'pointer', fontSize: 15, color: '#6b6880', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>✕</button>
+          <button onClick={onClose} style={{ width: 30, height: 30, borderRadius: 8, border: '1px solid rgba(0,0,0,0.09)', background: '#fff', cursor: 'pointer', fontSize: 15, color: '#565B66', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>✕</button>
         </div>
         <div style={{ padding: '18px 22px', overflowY: 'auto', flex: 1 }}>
           {!data ? (
-            <div style={{ textAlign: 'center', color: '#a09db8', padding: 30 }}>No run history available for this issue.</div>
+            <div style={{ textAlign: 'center', color: '#737985', padding: 30 }}>No run history available for this issue.</div>
           ) : (
             <div style={{ position: 'relative', paddingLeft: 28 }}>
               <div style={{ position: 'absolute', left: 10, top: 0, bottom: 0, width: 2, background: '#e9e4fe', borderRadius: 2 }} />
               {data.runs.map((run, idx) => {
-                const dotColor = run.status === 'Success' ? '#166534' : run.status === 'Partial' ? '#b45309' : '#c0392b'
-                const acBg = run.action === 'accepted' ? '#f0fdf4' : run.action === 'fp' ? '#f4f3f8' : '#fff7ed'
-                const acBorder = run.action === 'accepted' ? '#bbf7d0' : run.action === 'fp' ? '#d4d2e0' : '#fed7aa'
-                const acColor = run.action === 'accepted' ? '#166534' : run.action === 'fp' ? '#6b6880' : '#b45309'
+                const dotColor = run.status === 'Success' ? '#15693B' : run.status === 'Partial' ? '#b45309' : '#D5493A'
+                const acBg = run.action === 'accepted' ? '#F0FAF4' : run.action === 'fp' ? '#F4F6FA' : '#fff7ed'
+                const acBorder = run.action === 'accepted' ? '#B6EDD0' : run.action === 'fp' ? '#D0D4DD' : '#fed7aa'
+                const acColor = run.action === 'accepted' ? '#15693B' : run.action === 'fp' ? '#565B66' : '#b45309'
                 const acIcon = run.action === 'accepted' ? '✅' : run.action === 'fp' ? '🚫' : '⏳'
                 const isLatest = idx === 0
                 return (
@@ -243,28 +243,28 @@ function PrevRunsModal({ sequenceId, issue, onClose }: { sequenceId: string; iss
                     <div style={{ background: '#fff', border: '1px solid rgba(0,0,0,0.07)', borderRadius: 10, padding: '12px 14px' }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                          <span style={{ fontSize: 10, fontWeight: 700, color: '#7c5dfa', background: '#ede9ff', padding: '2px 8px', borderRadius: 20 }}>
+                          <span style={{ fontSize: 10, fontWeight: 700, color: '#1F3A93', background: '#E6ECFA', padding: '2px 8px', borderRadius: 20 }}>
                             {run.batch.replace('PDM_Monitor_', 'PDM-')}
                           </span>
-                          {isLatest && <span style={{ fontSize: 10, color: '#7c5dfa', background: '#ede9ff', padding: '1px 7px', borderRadius: 20 }}>Latest</span>}
+                          {isLatest && <span style={{ fontSize: 10, color: '#1F3A93', background: '#E6ECFA', padding: '1px 7px', borderRadius: 20 }}>Latest</span>}
                         </div>
-                        <span style={{ fontSize: 11, color: '#a09db8' }}>{run.date}</span>
+                        <span style={{ fontSize: 11, color: '#737985' }}>{run.date}</span>
                       </div>
                       <div style={{ display: 'flex', gap: 8, marginBottom: 7, flexWrap: 'wrap', alignItems: 'center' }}>
-                        <span style={{ fontSize: 10, fontWeight: 500, padding: '2px 8px', borderRadius: 20, background: run.status === 'Success' ? '#f0fdf4' : run.status === 'Partial' ? '#fff7ed' : '#fff1f1', color: run.status === 'Success' ? '#166534' : run.status === 'Partial' ? '#b45309' : '#c0392b' }}>{run.status}</span>
-                        <span style={{ fontSize: 11, color: '#6b6880' }}>Confidence: <strong>{run.confidence}</strong></span>
+                        <span style={{ fontSize: 10, fontWeight: 500, padding: '2px 8px', borderRadius: 20, background: run.status === 'Success' ? '#F0FAF4' : run.status === 'Partial' ? '#fff7ed' : '#fff1f1', color: run.status === 'Success' ? '#15693B' : run.status === 'Partial' ? '#b45309' : '#D5493A' }}>{run.status}</span>
+                        <span style={{ fontSize: 11, color: '#565B66' }}>Confidence: <strong>{run.confidence}</strong></span>
                       </div>
-                      <div style={{ fontSize: 11, color: '#6b6880', marginBottom: 5 }}>
+                      <div style={{ fontSize: 11, color: '#565B66', marginBottom: 5 }}>
                         <strong>Agents ran: </strong>
                         {run.agents.map((a: string, i: number) => (
-                          <span key={i} style={{ fontSize: 10, background: '#f0eef8', color: '#7c5dfa', padding: '2px 7px', borderRadius: 20, marginRight: 4 }}>{a}</span>
+                          <span key={i} style={{ fontSize: 10, background: '#F4F6FA', color: '#1F3A93', padding: '2px 7px', borderRadius: 20, marginRight: 4 }}>{a}</span>
                         ))}
                       </div>
-                      <div style={{ fontSize: 11, color: '#6b6880', marginBottom: 5 }}><strong>Evidence: </strong>{run.evidence}</div>
-                      <div style={{ fontSize: 11, color: '#6b6880', marginBottom: 7 }}>
+                      <div style={{ fontSize: 11, color: '#565B66', marginBottom: 5 }}><strong>Evidence: </strong>{run.evidence}</div>
+                      <div style={{ fontSize: 11, color: '#565B66', marginBottom: 7 }}>
                         <strong>Impacted: </strong>
                         {run.impacted.map((f: string, i: number) => (
-                          <span key={i} style={{ fontSize: 10, background: '#f4f3f8', color: '#6b6880', padding: '2px 7px', borderRadius: 20, marginRight: 4 }}>{f}</span>
+                          <span key={i} style={{ fontSize: 10, background: '#F4F6FA', color: '#565B66', padding: '2px 7px', borderRadius: 20, marginRight: 4 }}>{f}</span>
                         ))}
                       </div>
                       <div style={{ display: 'flex', alignItems: 'flex-start', gap: 6, padding: '7px 10px', borderRadius: 8, background: acBg, border: `1px solid ${acBorder}` }}>
@@ -294,9 +294,9 @@ function Toast({ msg, type, onDone }: { msg: string; type: 'success' | 'info' | 
   }, [onDone])
 
   const cfg = {
-    success: { bg: '#f0fdf4', border: '#bbf7d0', color: '#166534', icon: '✓' },
-    info:    { bg: '#f4f3f8', border: '#d4d2e0', color: '#6b6880',  icon: '•' },
-    error:   { bg: '#fff1f1', border: '#fecaca', color: '#c0392b',  icon: '✕' },
+    success: { bg: '#F0FAF4', border: '#B6EDD0', color: '#15693B', icon: '✓' },
+    info:    { bg: '#F4F6FA', border: '#D0D4DD', color: '#565B66',  icon: '•' },
+    error:   { bg: '#fff1f1', border: '#fecaca', color: '#D5493A',  icon: '✕' },
   }[type]
 
   return (
@@ -366,7 +366,7 @@ function IssueModal({ issue, onClose, onStatusChange }: { issue: Issue; onClose:
   ]
 
   const visibleFields = expanded ? allFields : allFields.slice(0, 5)
-  const scoreColor = issue.confidence_score >= 0.90 ? '#166534' : issue.confidence_score >= 0.75 ? '#7c5dfa' : '#b45309'
+  const scoreColor = issue.confidence_score >= 0.90 ? '#15693B' : issue.confidence_score >= 0.75 ? '#1F3A93' : '#b45309'
 
   async function handleAccept() {
     setSaving(true)
@@ -428,32 +428,32 @@ function IssueModal({ issue, onClose, onStatusChange }: { issue: Issue; onClose:
       >
         <div style={{ padding: '18px 22px 14px', borderBottom: '1px solid rgba(0,0,0,0.07)', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', flexShrink: 0 }}>
           <div>
-            <div style={{ fontSize: 17, fontWeight: 600, color: '#0d0d12', marginBottom: 6 }}>{issue.sequence_id.split('-').slice(-2).join('-')} — {issue.provider}</div>
+            <div style={{ fontSize: 17, fontWeight: 600, color: '#12141A', marginBottom: 6 }}>{issue.sequence_id.split('-').slice(-2).join('-')} — {issue.provider}</div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center' }}>
-              <Tag label={ISSUE_TYPE_LABELS[issue.issue_type]} colors={typeColors[issue.issue_type] || '#f4f3f8|#6b6880'} />
+              <Tag label={ISSUE_TYPE_LABELS[issue.issue_type]} colors={typeColors[issue.issue_type] || '#F4F6FA|#565B66'} />
               <Tag label={`${SEVERITY_LABELS[issue.severity]} priority`} colors={priColors[issue.severity]} />
-              {resolved ? <Tag label="Resolved" colors="#f0fdf4|#166534" /> : fpDone ? <Tag label="False Positive" colors="#f4f3f8|#6b6880" /> : <Tag label={issue.status} colors={statusColors[issue.status]} />}
-              <span style={{ fontSize: 11, color: '#a09db8', marginLeft: 4 }}>NPI: {issue.npi}</span>
+              {resolved ? <Tag label="Resolved" colors="#F0FAF4|#15693B" /> : fpDone ? <Tag label="False Positive" colors="#F4F6FA|#565B66" /> : <Tag label={issue.status} colors={statusColors[issue.status]} />}
+              <span style={{ fontSize: 11, color: '#737985', marginLeft: 4 }}>NPI: {issue.npi}</span>
             </div>
           </div>
-          <button onClick={onClose} style={{ width: 32, height: 32, borderRadius: 8, border: '1px solid rgba(0,0,0,0.09)', background: '#fff', cursor: 'pointer', fontSize: 16, color: '#6b6880', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginLeft: 12 }}>✕</button>
+          <button onClick={onClose} style={{ width: 32, height: 32, borderRadius: 8, border: '1px solid rgba(0,0,0,0.09)', background: '#fff', cursor: 'pointer', fontSize: 16, color: '#565B66', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginLeft: 12 }}>✕</button>
         </div>
 
         <div style={{ padding: '18px 22px', overflowY: 'auto', flex: 1 }}>
-          <div style={{ background: 'linear-gradient(135deg,#f5f2ff,#faf8ff)', border: '1px solid rgba(124,93,250,0.2)', borderRadius: 12, padding: '16px 18px', marginBottom: 14 }}>
+          <div style={{ background: 'linear-gradient(135deg,#F4F6FA,#faf8ff)', border: '1px solid rgba(124,93,250,0.2)', borderRadius: 12, padding: '16px 18px', marginBottom: 14 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
-              <div style={{ width: 26, height: 26, background: '#7c5dfa', borderRadius: 7, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: 14 }}>✦</div>
-              <div style={{ fontSize: 13, fontWeight: 600, color: '#7c5dfa' }}>AI Recommendation</div>
-              <span style={{ marginLeft: 'auto', fontSize: 11, color: '#7c5dfa', background: 'rgba(124,93,250,0.1)', padding: '3px 10px', borderRadius: 20 }}>{issue.req_id}</span>
+              <div style={{ width: 26, height: 26, background: '#1F3A93', borderRadius: 7, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: 14 }}>✦</div>
+              <div style={{ fontSize: 13, fontWeight: 600, color: '#1F3A93' }}>AI Recommendation</div>
+              <span style={{ marginLeft: 'auto', fontSize: 11, color: '#1F3A93', background: 'rgba(124,93,250,0.1)', padding: '3px 10px', borderRadius: 20 }}>{issue.req_id}</span>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 12 }}>
               <div style={{ width: 64, height: 64, borderRadius: '50%', border: `3px solid ${scoreColor}`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flexShrink: 0, background: '#fff' }}>
                 <div style={{ fontSize: 20, fontWeight: 700, color: scoreColor, lineHeight: 1, animation: 'fadeIn 0.6s ease forwards' }}>{Math.round(issue.confidence_score * 100)}%</div>
                 <style>{`@keyframes fadeIn { from { opacity:0; transform:scale(0.7); } to { opacity:1; transform:scale(1); } }`}</style>
-                <div style={{ fontSize: 9, color: '#a09db8', marginTop: 1 }}>confidence</div>
+                <div style={{ fontSize: 9, color: '#737985', marginTop: 1 }}>confidence</div>
               </div>
               <div style={{ flex: 1 }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11, color: '#6b6880', marginBottom: 5 }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11, color: '#565B66', marginBottom: 5 }}>
                   <span>AI confidence score</span>
                   <span style={{ fontWeight: 600, color: scoreColor }}>{Math.round(issue.confidence_score * 100)}% — {issue.confidence_score >= 0.90 ? 'Very high' : issue.confidence_score >= 0.75 ? 'High' : 'Moderate'} confidence</span>
                 </div>
@@ -473,7 +473,7 @@ function IssueModal({ issue, onClose, onStatusChange }: { issue: Issue; onClose:
                     to   { width: ${Math.round(issue.confidence_score * 100)}%; opacity: 1; }
                   }
                 `}</style>
-                <div style={{ fontSize: 11, color: '#a09db8', marginTop: 5 }}>Based on NPI match strength, attribute overlap, and historical pattern similarity</div>
+                <div style={{ fontSize: 11, color: '#737985', marginTop: 5 }}>Based on NPI match strength, attribute overlap, and historical pattern similarity</div>
               </div>
             </div>
             <div style={{ fontSize: 12, color: '#4a4560', lineHeight: 1.7, paddingTop: 10, borderTop: '1px solid rgba(124,93,250,0.15)' }}>
@@ -484,32 +484,32 @@ function IssueModal({ issue, onClose, onStatusChange }: { issue: Issue; onClose:
 
           <div style={{ marginBottom: 14 }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#0d0d12' }}>Field comparison — evidence</div>
-              <button onClick={() => setExpanded(!expanded)} style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 11, color: '#7c5dfa', background: '#ede9ff', border: 'none', padding: '4px 10px', borderRadius: 6, cursor: 'pointer' }}>
+              <div style={{ fontSize: 12, fontWeight: 600, color: '#12141A' }}>Field comparison — evidence</div>
+              <button onClick={() => setExpanded(!expanded)} style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 11, color: '#1F3A93', background: '#E6ECFA', border: 'none', padding: '4px 10px', borderRadius: 6, cursor: 'pointer' }}>
                 {expanded ? '▲ Show less' : '▼ Show all fields'}
               </button>
             </div>
             <table style={{ width: '100%', borderCollapse: 'collapse', borderRadius: 10, overflow: 'hidden', border: '1px solid rgba(0,0,0,0.07)', fontSize: 12 }}>
               <thead>
-                <tr style={{ background: '#f8f7fc' }}>
-                  <th style={{ padding: '9px 12px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#6b6880', width: 120 }}>Field</th>
-                  <th style={{ padding: '9px 12px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#6b6880' }}>{recordAId} <span style={{ fontWeight: 400, color: '#a09db8' }}>(live)</span></th>
-                  {isDuplicate && <th style={{ padding: '9px 12px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#6b6880' }}>{recordBId} <span style={{ fontWeight: 400, color: '#a09db8' }}>(duplicate)</span></th>}
-                  <th style={{ padding: '9px 12px', textAlign: 'center', fontSize: 11, fontWeight: 600, color: '#6b6880', width: 90 }}>Status</th>
+                <tr style={{ background: '#F4F6FA' }}>
+                  <th style={{ padding: '9px 12px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#565B66', width: 120 }}>Field</th>
+                  <th style={{ padding: '9px 12px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#565B66' }}>{recordAId} <span style={{ fontWeight: 400, color: '#737985' }}>(live)</span></th>
+                  {isDuplicate && <th style={{ padding: '9px 12px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#565B66' }}>{recordBId} <span style={{ fontWeight: 400, color: '#737985' }}>(duplicate)</span></th>}
+                  <th style={{ padding: '9px 12px', textAlign: 'center', fontSize: 11, fontWeight: 600, color: '#565B66', width: 90 }}>Status</th>
                 </tr>
               </thead>
               <tbody>
                 {visibleFields.map(row => (
                   <tr key={row.field} style={{ borderBottom: '1px solid rgba(0,0,0,0.05)' }}>
-                    <td style={{ padding: '9px 12px', color: '#6b6880', fontWeight: 500 }}>{row.field}</td>
-                    <td style={{ padding: '9px 12px', background: row.impacted ? '#fff5f5' : '#fff', color: row.impacted ? '#c0392b' : row.a === 'N/A' ? '#a09db8' : '#0d0d12', fontWeight: row.impacted ? 500 : 400, fontStyle: row.a === 'N/A' ? 'italic' : 'normal' }}>{row.a}</td>
-                    {isDuplicate && <td style={{ padding: '9px 12px', color: '#a09db8', fontStyle: 'italic' }}>{row.b}</td>}
+                    <td style={{ padding: '9px 12px', color: '#565B66', fontWeight: 500 }}>{row.field}</td>
+                    <td style={{ padding: '9px 12px', background: row.impacted ? '#fff5f5' : '#fff', color: row.impacted ? '#D5493A' : row.a === 'N/A' ? '#737985' : '#12141A', fontWeight: row.impacted ? 500 : 400, fontStyle: row.a === 'N/A' ? 'italic' : 'normal' }}>{row.a}</td>
+                    {isDuplicate && <td style={{ padding: '9px 12px', color: '#737985', fontStyle: 'italic' }}>{row.b}</td>}
                     <td style={{ padding: '9px 12px', textAlign: 'center' }}>
                       {row.impacted
-                        ? <Tag label="Impacted" colors="#fff1f1|#c0392b" />
+                        ? <Tag label="Impacted" colors="#fff1f1|#D5493A" />
                         : row.a === 'N/A'
-                          ? <span style={{ fontSize: 11, color: '#a09db8' }}>— N/A</span>
-                          : <span style={{ fontSize: 11, color: '#166534' }}>● OK</span>}
+                          ? <span style={{ fontSize: 11, color: '#737985' }}>— N/A</span>
+                          : <span style={{ fontSize: 11, color: '#15693B' }}>● OK</span>}
                     </td>
                   </tr>
                 ))}
@@ -518,56 +518,56 @@ function IssueModal({ issue, onClose, onStatusChange }: { issue: Issue; onClose:
           </div>
         </div>
 
-        <div style={{ padding: '14px 22px', borderTop: '1px solid rgba(0,0,0,0.07)', background: '#faf9fe', flexShrink: 0 }}>
+        <div style={{ padding: '14px 22px', borderTop: '1px solid rgba(0,0,0,0.07)', background: '#F4F6FA', flexShrink: 0 }}>
           {resolved ? (
-            <div style={{ background: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: 10, padding: '14px 16px' }}>
+            <div style={{ background: '#F0FAF4', border: '1px solid #B6EDD0', borderRadius: 10, padding: '14px 16px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
                 <span style={{ fontSize: 18 }}>✅</span>
-                <span style={{ fontSize: 13, fontWeight: 600, color: '#166534' }}>Issue Resolved</span>
+                <span style={{ fontSize: 13, fontWeight: 600, color: '#15693B' }}>Issue Resolved</span>
               </div>
-              <div style={{ fontSize: 12, color: '#166534' }}>Resolved by <strong>Sandhiya Raja</strong> (Provider OPS Analyst)</div>
+              <div style={{ fontSize: 12, color: '#15693B' }}>Resolved by <strong>Sandhiya Raja</strong> (Provider OPS Analyst)</div>
               <div style={{ fontSize: 11, color: '#4ade80', marginTop: 3 }}>🕐 {resolvedTime}</div>
             </div>
           ) : fpDone ? (
-            <div style={{ background: '#f4f3f8', border: '1px solid #d4d2e0', borderRadius: 10, padding: '14px 16px' }}>
+            <div style={{ background: '#F4F6FA', border: '1px solid #D0D4DD', borderRadius: 10, padding: '14px 16px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
                 <span style={{ fontSize: 18 }}>🚫</span>
-                <span style={{ fontSize: 13, fontWeight: 600, color: '#6b6880' }}>Marked as False Positive</span>
+                <span style={{ fontSize: 13, fontWeight: 600, color: '#565B66' }}>Marked as False Positive</span>
               </div>
-              <div style={{ fontSize: 12, color: '#6b6880' }}>By <strong>Sandhiya Raja</strong> — {fpReason}</div>
+              <div style={{ fontSize: 12, color: '#565B66' }}>By <strong>Sandhiya Raja</strong> — {fpReason}</div>
             </div>
           ) : showFpForm ? (
             <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#0d0d12', marginBottom: 8 }}>Review & Action — Reason required</div>
+              <div style={{ fontSize: 12, fontWeight: 600, color: '#12141A', marginBottom: 8 }}>Review & Action — Reason required</div>
               <textarea
                 value={fpReason}
                 onChange={e => { setFpReason(e.target.value); setFpError(false) }}
                 placeholder="Type your reason for marking as false positive… (required)"
-                style={{ width: '100%', padding: '9px 12px', border: `1px solid ${fpError ? '#c0392b' : 'rgba(0,0,0,0.09)'}`, borderRadius: 8, fontSize: 12, background: '#fff', resize: 'none', height: 64, fontFamily: 'inherit', outline: 'none', marginBottom: 4 }}
+                style={{ width: '100%', padding: '9px 12px', border: `1px solid ${fpError ? '#D5493A' : 'rgba(0,0,0,0.09)'}`, borderRadius: 8, fontSize: 12, background: '#fff', resize: 'none', height: 64, fontFamily: 'inherit', outline: 'none', marginBottom: 4 }}
               />
-              {fpError && <div style={{ fontSize: 11, color: '#c0392b', marginBottom: 8 }}>⚠ Reason is required before submitting.</div>}
+              {fpError && <div style={{ fontSize: 11, color: '#D5493A', marginBottom: 8 }}>⚠ Reason is required before submitting.</div>}
               <div style={{ display: 'flex', gap: 8 }}>
-                <button onClick={handleFpSubmit} disabled={saving} style={{ padding: '8px 16px', background: saving ? '#f4f3f8' : '#fff1f1', color: saving ? '#a09db8' : '#c0392b', border: `1px solid ${saving ? '#d4d2e0' : '#fecaca'}`, borderRadius: 8, fontSize: 12, fontWeight: 500, cursor: saving ? 'default' : 'pointer' }}>
+                <button onClick={handleFpSubmit} disabled={saving} style={{ padding: '8px 16px', background: saving ? '#F4F6FA' : '#fff1f1', color: saving ? '#737985' : '#D5493A', border: `1px solid ${saving ? '#D0D4DD' : '#fecaca'}`, borderRadius: 8, fontSize: 12, fontWeight: 500, cursor: saving ? 'default' : 'pointer' }}>
                   {saving ? '⟳ Saving…' : '✕ Submit false positive'}
                 </button>
-                <button onClick={() => { setShowFpForm(false); setFpError(false) }} disabled={saving} style={{ padding: '8px 14px', background: '#fff', color: '#6b6880', border: '1px solid rgba(0,0,0,0.09)', borderRadius: 8, fontSize: 12, cursor: saving ? 'default' : 'pointer' }}>Cancel</button>
+                <button onClick={() => { setShowFpForm(false); setFpError(false) }} disabled={saving} style={{ padding: '8px 14px', background: '#fff', color: '#565B66', border: '1px solid rgba(0,0,0,0.09)', borderRadius: 8, fontSize: 12, cursor: saving ? 'default' : 'pointer' }}>Cancel</button>
               </div>
             </div>
           ) : (
             <div>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
-                <div style={{ fontSize: 12, fontWeight: 600, color: '#0d0d12' }}>Review & Action</div>
+                <div style={{ fontSize: 12, fontWeight: 600, color: '#12141A' }}>Review & Action</div>
                 <div style={{ display: 'flex', gap: 6 }}>
-                  <span style={{ fontSize: 10, background: '#f0fdf4', color: '#166534', border: '1px solid #bbf7d0', padding: '2px 8px', borderRadius: 6, fontWeight: 500 }}>A — Accept</span>
-                  <span style={{ fontSize: 10, background: '#fff1f1', color: '#c0392b', border: '1px solid #fecaca', padding: '2px 8px', borderRadius: 6, fontWeight: 500 }}>F — False positive</span>
-                  <span style={{ fontSize: 10, background: '#f4f3f8', color: '#6b6880', border: '1px solid #e5e3f0', padding: '2px 8px', borderRadius: 6, fontWeight: 500 }}>Esc — Close</span>
+                  <span style={{ fontSize: 10, background: '#F0FAF4', color: '#15693B', border: '1px solid #B6EDD0', padding: '2px 8px', borderRadius: 6, fontWeight: 500 }}>A — Accept</span>
+                  <span style={{ fontSize: 10, background: '#fff1f1', color: '#D5493A', border: '1px solid #fecaca', padding: '2px 8px', borderRadius: 6, fontWeight: 500 }}>F — False positive</span>
+                  <span style={{ fontSize: 10, background: '#F4F6FA', color: '#565B66', border: '1px solid #e5e3f0', padding: '2px 8px', borderRadius: 6, fontWeight: 500 }}>Esc — Close</span>
                 </div>
               </div>
               <div style={{ display: 'flex', gap: 9, alignItems: 'center' }}>
-                <button onClick={handleAccept} disabled={saving} style={{ padding: '9px 18px', background: saving ? '#f4f3f8' : '#f0fdf4', color: saving ? '#a09db8' : '#166534', border: `1px solid ${saving ? '#d4d2e0' : '#bbf7d0'}`, borderRadius: 8, fontSize: 12, fontWeight: 500, cursor: saving ? 'default' : 'pointer' }}>
+                <button onClick={handleAccept} disabled={saving} style={{ padding: '9px 18px', background: saving ? '#F4F6FA' : '#F0FAF4', color: saving ? '#737985' : '#15693B', border: `1px solid ${saving ? '#D0D4DD' : '#B6EDD0'}`, borderRadius: 8, fontSize: 12, fontWeight: 500, cursor: saving ? 'default' : 'pointer' }}>
                   {saving ? '⟳ Saving…' : '✓ Accept — valid issue'}
                 </button>
-                <button onClick={() => setShowFpForm(true)} disabled={saving} style={{ padding: '9px 18px', background: '#fff1f1', color: '#c0392b', border: '1px solid #fecaca', borderRadius: 8, fontSize: 12, fontWeight: 500, cursor: saving ? 'default' : 'pointer' }}>✕ Mark as false positive</button>
+                <button onClick={() => setShowFpForm(true)} disabled={saving} style={{ padding: '9px 18px', background: '#fff1f1', color: '#D5493A', border: '1px solid #fecaca', borderRadius: 8, fontSize: 12, fontWeight: 500, cursor: saving ? 'default' : 'pointer' }}>✕ Mark as false positive</button>
               </div>
             </div>
           )}
@@ -666,29 +666,29 @@ export default function WorkQueue() {
   })
 
   return (
-    <div style={{ flex: 1, overflowY: 'auto', padding: '20px 24px', background: '#f0eef8' }}>
+    <div style={{ flex: 1, overflowY: 'auto', padding: '20px 24px', background: '#F4F6FA' }}>
 
       {/* TOPBAR */}
       <div style={{ background: '#fff', borderRadius: 12, padding: '12px 18px', marginBottom: 18, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <div>
-          <div style={{ fontSize: 15, fontWeight: 600, color: '#0d0d12' }}>Work Queue</div>
-          <div style={{ fontSize: 11, color: '#a09db8', marginTop: 1 }}>Review and act on AI-flagged issues</div>
+          <div style={{ fontSize: 15, fontWeight: 600, color: '#12141A' }}>Work Queue</div>
+          <div style={{ fontSize: 11, color: '#737985', marginTop: 1 }}>Review and act on AI-flagged issues</div>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           {statusFilter !== 'All' && (
-            <span style={{ fontSize: 11, color: '#166534', background: '#f0fdf4', border: '1px solid #bbf7d0', padding: '4px 12px', borderRadius: 20, display: 'flex', alignItems: 'center', gap: 6 }}>
+            <span style={{ fontSize: 11, color: '#15693B', background: '#F0FAF4', border: '1px solid #B6EDD0', padding: '4px 12px', borderRadius: 20, display: 'flex', alignItems: 'center', gap: 6 }}>
               ● Showing: Open issues only
-              <span onClick={() => { setStatusFilter('All'); navigate('/queue', { replace: true }) }} style={{ cursor: 'pointer', color: '#16a34a', fontWeight: 700, marginLeft: 2 }}>✕</span>
+              <span onClick={() => { setStatusFilter('All'); navigate('/queue', { replace: true }) }} style={{ cursor: 'pointer', color: '#1E9E57', fontWeight: 700, marginLeft: 2 }}>✕</span>
             </span>
           )}
-          {loading && <span style={{ fontSize: 11, color: '#7c5dfa', background: '#ede9ff', padding: '4px 12px', borderRadius: 20 }}>⟳ Loading from database…</span>}
+          {loading && <span style={{ fontSize: 11, color: '#1F3A93', background: '#E6ECFA', padding: '4px 12px', borderRadius: 20 }}>⟳ Loading from database…</span>}
         </div>
       </div>
 
       {/* TABS */}
       <div style={{ display: 'flex', gap: 6, marginBottom: 14 }}>
         {tabs.map(t => (
-          <div key={t} onClick={() => { setActiveTab(t); setBatchFilter(null); setSearch(''); setTypeFilter('All types'); setPriorityFilter('All priorities') }} style={{ padding: '6px 14px', fontSize: 12, borderRadius: 8, cursor: 'pointer', border: '1px solid rgba(0,0,0,0.09)', background: activeTab === t ? '#ede9ff' : '#fff', color: activeTab === t ? '#7c5dfa' : '#6b6880', fontWeight: activeTab === t ? 500 : 400 }}>
+          <div key={t} onClick={() => { setActiveTab(t); setBatchFilter(null); setSearch(''); setTypeFilter('All types'); setPriorityFilter('All priorities') }} style={{ padding: '6px 14px', fontSize: 12, borderRadius: 8, cursor: 'pointer', border: '1px solid rgba(0,0,0,0.09)', background: activeTab === t ? '#E6ECFA' : '#fff', color: activeTab === t ? '#1F3A93' : '#565B66', fontWeight: activeTab === t ? 500 : 400 }}>
             {t}
           </div>
         ))}
@@ -702,17 +702,17 @@ export default function WorkQueue() {
             value={search}
             onChange={e => setSearch(e.target.value)}
             placeholder="Search provider name, NPI or issue ID…"
-            style={{ width: '100%', padding: '7px 32px 7px 11px', border: `1px solid ${search ? '#7c5dfa' : 'rgba(0,0,0,0.09)'}`, borderRadius: 8, fontSize: 12, background: '#fff', color: '#0d0d12', outline: 'none' }}
+            style={{ width: '100%', padding: '7px 32px 7px 11px', border: `1px solid ${search ? '#1F3A93' : 'rgba(0,0,0,0.09)'}`, borderRadius: 8, fontSize: 12, background: '#fff', color: '#12141A', outline: 'none' }}
           />
           {search && (
             <button
               onClick={() => setSearch('')}
-              style={{ position: 'absolute', right: 8, background: 'none', border: 'none', cursor: 'pointer', color: '#a09db8', fontSize: 14, display: 'flex', alignItems: 'center', justifyContent: 'center', width: 20, height: 20, borderRadius: '50%', padding: 0 }}
+              style={{ position: 'absolute', right: 8, background: 'none', border: 'none', cursor: 'pointer', color: '#737985', fontSize: 14, display: 'flex', alignItems: 'center', justifyContent: 'center', width: 20, height: 20, borderRadius: '50%', padding: 0 }}
               title="Clear search"
             >✕</button>
           )}
         </div>
-        <select value={typeFilter} onChange={e => setTypeFilter(e.target.value)} style={{ fontSize: 12, padding: '7px 11px', border: `1px solid ${typeFilter !== 'All types' ? '#7c5dfa' : 'rgba(0,0,0,0.09)'}`, borderRadius: 8, background: typeFilter !== 'All types' ? '#ede9ff' : '#fff', color: typeFilter !== 'All types' ? '#7c5dfa' : '#0d0d12', height: 34, outline: 'none', fontWeight: typeFilter !== 'All types' ? 500 : 400 }}>
+        <select value={typeFilter} onChange={e => setTypeFilter(e.target.value)} style={{ fontSize: 12, padding: '7px 11px', border: `1px solid ${typeFilter !== 'All types' ? '#1F3A93' : 'rgba(0,0,0,0.09)'}`, borderRadius: 8, background: typeFilter !== 'All types' ? '#E6ECFA' : '#fff', color: typeFilter !== 'All types' ? '#1F3A93' : '#12141A', height: 34, outline: 'none', fontWeight: typeFilter !== 'All types' ? 500 : 400 }}>
           <option value="All types">All types</option>
           <option value="DUPLICATE_RECORD">Duplicate</option>
           <option value="CONFLICT_DETECTED">Conflict</option>
@@ -722,22 +722,22 @@ export default function WorkQueue() {
           <option value="MASTER_DATA_QUALITY">Master Data</option>
           <option value="CREDENTIALING_MISMATCH">Credentialing</option>
         </select>
-        <select value={priorityFilter} onChange={e => setPriorityFilter(e.target.value)} style={{ fontSize: 12, padding: '7px 11px', border: `1px solid ${priorityFilter !== 'All priorities' ? '#7c5dfa' : 'rgba(0,0,0,0.09)'}`, borderRadius: 8, background: priorityFilter !== 'All priorities' ? '#ede9ff' : '#fff', color: priorityFilter !== 'All priorities' ? '#7c5dfa' : '#0d0d12', height: 34, outline: 'none', fontWeight: priorityFilter !== 'All priorities' ? 500 : 400 }}>
+        <select value={priorityFilter} onChange={e => setPriorityFilter(e.target.value)} style={{ fontSize: 12, padding: '7px 11px', border: `1px solid ${priorityFilter !== 'All priorities' ? '#1F3A93' : 'rgba(0,0,0,0.09)'}`, borderRadius: 8, background: priorityFilter !== 'All priorities' ? '#E6ECFA' : '#fff', color: priorityFilter !== 'All priorities' ? '#1F3A93' : '#12141A', height: 34, outline: 'none', fontWeight: priorityFilter !== 'All priorities' ? 500 : 400 }}>
           <option value="All priorities">All priorities</option>
           <option value="HIGH">High</option>
           <option value="MEDIUM">Medium</option>
           <option value="LOW">Low</option>
         </select>
         <div style={{ position: 'relative' }}>
-          <button onClick={() => setShowDateDrop(!showDateDrop)} style={{ padding: '7px 12px', border: '1px solid rgba(0,0,0,0.09)', borderRadius: 8, background: '#fff', fontSize: 12, color: '#6b6880', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 5 }}>
+          <button onClick={() => setShowDateDrop(!showDateDrop)} style={{ padding: '7px 12px', border: '1px solid rgba(0,0,0,0.09)', borderRadius: 8, background: '#fff', fontSize: 12, color: '#565B66', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 5 }}>
             📅 {dateLabel} ▾
           </button>
           {showDateDrop && (
             <div style={{ position: 'absolute', top: 'calc(100% + 4px)', right: 0, background: '#fff', border: '1px solid rgba(0,0,0,0.1)', borderRadius: 10, boxShadow: '0 8px 24px rgba(0,0,0,0.1)', minWidth: 160, zIndex: 100 }}>
               {dateOptions.map(opt => (
-                <div key={opt.label} onClick={() => { setDateLabel(opt.label); setShowDateDrop(false) }} style={{ padding: '9px 14px', fontSize: 12, color: '#0d0d12', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div key={opt.label} onClick={() => { setDateLabel(opt.label); setShowDateDrop(false) }} style={{ padding: '9px 14px', fontSize: 12, color: '#12141A', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   {opt.label}
-                  <span style={{ fontSize: 10, color: '#a09db8', background: '#f4f3f8', padding: '1px 6px', borderRadius: 10 }}>{opt.count}</span>
+                  <span style={{ fontSize: 10, color: '#737985', background: '#F4F6FA', padding: '1px 6px', borderRadius: 10 }}>{opt.count}</span>
                 </div>
               ))}
             </div>
@@ -756,17 +756,17 @@ export default function WorkQueue() {
         <div style={{ background: '#fff', border: '1px solid rgba(0,0,0,0.07)', borderRadius: 12, overflow: 'hidden' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 12 }}>
             <thead>
-              <tr style={{ background: '#f8f7fc' }}>
+              <tr style={{ background: '#F4F6FA' }}>
                 <th style={{ padding: '10px 12px', width: 36 }}><input type="checkbox" /></th>
-                <th style={{ padding: '10px 12px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#6b6880' }}>Batch ID</th>
-                <th style={{ padding: '10px 12px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#6b6880' }}>Issue ID</th>
-                <th style={{ padding: '10px 12px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#6b6880' }}>Provider</th>
-                <th style={{ padding: '10px 12px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#6b6880' }}>NPI</th>
-                <th style={{ padding: '10px 12px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#6b6880' }}>Type</th>
-                <th style={{ padding: '10px 12px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#6b6880' }}>Priority</th>
-                <th style={{ padding: '10px 12px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#6b6880' }}>Queue</th>
-                <th style={{ padding: '10px 12px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#6b6880' }}>Status</th>
-                <th style={{ padding: '10px 12px', textAlign: 'left', fontSize: 11, fontWeight: 600, cursor: 'pointer', color: '#7c5dfa' }}>Detected ▾</th>
+                <th style={{ padding: '10px 12px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#565B66' }}>Batch ID</th>
+                <th style={{ padding: '10px 12px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#565B66' }}>Issue ID</th>
+                <th style={{ padding: '10px 12px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#565B66' }}>Provider</th>
+                <th style={{ padding: '10px 12px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#565B66' }}>NPI</th>
+                <th style={{ padding: '10px 12px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#565B66' }}>Type</th>
+                <th style={{ padding: '10px 12px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#565B66' }}>Priority</th>
+                <th style={{ padding: '10px 12px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#565B66' }}>Queue</th>
+                <th style={{ padding: '10px 12px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#565B66' }}>Status</th>
+                <th style={{ padding: '10px 12px', textAlign: 'left', fontSize: 11, fontWeight: 600, cursor: 'pointer', color: '#1F3A93' }}>Detected ▾</th>
               </tr>
             </thead>
             <tbody>
@@ -792,7 +792,7 @@ export default function WorkQueue() {
                   return (
                     <Fragment key={date}>
                       <tr>
-                        <td colSpan={10} style={{ padding: '6px 14px', background: '#f8f7fc', fontSize: 11, fontWeight: 600, color: '#7c5dfa', borderBottom: '1px solid rgba(0,0,0,0.06)' }}>
+                        <td colSpan={10} style={{ padding: '6px 14px', background: '#F4F6FA', fontSize: 11, fontWeight: 600, color: '#1F3A93', borderBottom: '1px solid rgba(0,0,0,0.06)' }}>
                           📅 {formatDateLabel(date)}
                         </td>
                       </tr>
@@ -800,21 +800,21 @@ export default function WorkQueue() {
                         <tr key={issue.sequence_id} onClick={() => setSelectedIssue(issue)} style={{ borderBottom: '1px solid rgba(0,0,0,0.05)', cursor: 'pointer' }}>
                           <td style={{ padding: '10px 12px' }} onClick={e => e.stopPropagation()}><input type="checkbox" /></td>
                           <td style={{ padding: '10px 12px' }} onClick={e => e.stopPropagation()}>
-                            <span onClick={() => setBatchFilter(issue.batchId)} style={{ fontSize: 10, fontWeight: 600, color: '#7c5dfa', background: '#ede9ff', padding: '2px 8px', borderRadius: 20, cursor: 'pointer', whiteSpace: 'nowrap' }}>
+                            <span onClick={() => setBatchFilter(issue.batchId)} style={{ fontSize: 10, fontWeight: 600, color: '#1F3A93', background: '#E6ECFA', padding: '2px 8px', borderRadius: 20, cursor: 'pointer', whiteSpace: 'nowrap' }}>
                               {issue.batchId.replace('PDM_Monitor_', 'PDM-')}
                             </span>
                           </td>
-                          <td style={{ padding: '10px 12px', color: '#7c5dfa', fontWeight: 600, fontSize: 11 }}><Highlight text={issue.sequence_id.split('-').slice(-2).join('-')} query={search} /></td>
+                          <td style={{ padding: '10px 12px', color: '#1F3A93', fontWeight: 600, fontSize: 11 }}><Highlight text={issue.sequence_id.split('-').slice(-2).join('-')} query={search} /></td>
                           <td style={{ padding: '10px 12px' }}>
                             <div style={{ fontWeight: 500 }}><Highlight text={issue.provider || ''} query={search} /></div>
-                            <div style={{ fontSize: 10, color: '#a09db8' }}>{issue.specialty || ''}</div>
+                            <div style={{ fontSize: 10, color: '#737985' }}>{issue.specialty || ''}</div>
                           </td>
-                          <td style={{ padding: '10px 12px', color: '#6b6880' }}><Highlight text={issue.npi || ''} query={search} /></td>
-                          <td style={{ padding: '10px 12px' }}><Tag label={ISSUE_TYPE_LABELS[issue.issue_type]} colors={typeColors[issue.issue_type] || '#f4f3f8|#6b6880'} /></td>
+                          <td style={{ padding: '10px 12px', color: '#565B66' }}><Highlight text={issue.npi || ''} query={search} /></td>
+                          <td style={{ padding: '10px 12px' }}><Tag label={ISSUE_TYPE_LABELS[issue.issue_type]} colors={typeColors[issue.issue_type] || '#F4F6FA|#565B66'} /></td>
                           <td style={{ padding: '10px 12px' }}><Tag label={SEVERITY_LABELS[issue.severity]} colors={priColors[issue.severity]} /></td>
                           <td style={{ padding: '10px 12px' }}><Tag label={QUEUE_LABELS[issue.queue_name]} colors='#eff6ff|#1d4ed8' /></td>
-                          <td style={{ padding: '10px 12px' }}><Tag label={statusDisplayLabel[issue.status] || issue.status} colors={statusColors[issue.status] || '#f4f3f8|#6b6880'} /></td>
-                          <td style={{ padding: '10px 12px', color: '#a09db8', fontSize: 11 }}>{new Date(issue.detectedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</td>
+                          <td style={{ padding: '10px 12px' }}><Tag label={statusDisplayLabel[issue.status] || issue.status} colors={statusColors[issue.status] || '#F4F6FA|#565B66'} /></td>
+                          <td style={{ padding: '10px 12px', color: '#737985', fontSize: 11 }}>{new Date(issue.detectedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</td>
                         </tr>
                       ))}
                     </Fragment>
@@ -823,14 +823,14 @@ export default function WorkQueue() {
               })()}
             </tbody>
           </table>
-          <div style={{ padding: '10px 18px', borderTop: '1px solid rgba(0,0,0,0.05)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 11, color: '#a09db8' }}>
+          <div style={{ padding: '10px 18px', borderTop: '1px solid rgba(0,0,0,0.05)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 11, color: '#737985' }}>
             <span>Showing {Math.min(currentPage * PAGE_SIZE, filteredIssues.length)} of {filteredIssues.length} issues</span>
             <div style={{ display: 'flex', gap: 5 }}>
-              <div onClick={() => setCurrentPage(p => Math.max(1, p - 1))} style={{ padding: '4px 10px', fontSize: 11, borderRadius: 7, cursor: currentPage === 1 ? 'default' : 'pointer', border: '1px solid rgba(0,0,0,0.09)', background: '#fff', color: currentPage === 1 ? '#d4d2e0' : '#6b6880' }}>← Prev</div>
+              <div onClick={() => setCurrentPage(p => Math.max(1, p - 1))} style={{ padding: '4px 10px', fontSize: 11, borderRadius: 7, cursor: currentPage === 1 ? 'default' : 'pointer', border: '1px solid rgba(0,0,0,0.09)', background: '#fff', color: currentPage === 1 ? '#D0D4DD' : '#565B66' }}>← Prev</div>
               {Array.from({ length: Math.ceil(filteredIssues.length / PAGE_SIZE) }, (_, i) => i + 1).map(p => (
-                <div key={p} onClick={() => setCurrentPage(p)} style={{ padding: '4px 10px', fontSize: 11, borderRadius: 7, cursor: 'pointer', border: '1px solid rgba(0,0,0,0.09)', background: p === currentPage ? '#ede9ff' : '#fff', color: p === currentPage ? '#7c5dfa' : '#6b6880', fontWeight: p === currentPage ? 600 : 400 }}>{p}</div>
+                <div key={p} onClick={() => setCurrentPage(p)} style={{ padding: '4px 10px', fontSize: 11, borderRadius: 7, cursor: 'pointer', border: '1px solid rgba(0,0,0,0.09)', background: p === currentPage ? '#E6ECFA' : '#fff', color: p === currentPage ? '#1F3A93' : '#565B66', fontWeight: p === currentPage ? 600 : 400 }}>{p}</div>
               ))}
-              <div onClick={() => setCurrentPage(p => Math.min(Math.ceil(filteredIssues.length / PAGE_SIZE), p + 1))} style={{ padding: '4px 10px', fontSize: 11, borderRadius: 7, cursor: currentPage === Math.ceil(filteredIssues.length / PAGE_SIZE) ? 'default' : 'pointer', border: '1px solid rgba(0,0,0,0.09)', background: '#fff', color: currentPage === Math.ceil(filteredIssues.length / PAGE_SIZE) ? '#d4d2e0' : '#6b6880' }}>Next →</div>
+              <div onClick={() => setCurrentPage(p => Math.min(Math.ceil(filteredIssues.length / PAGE_SIZE), p + 1))} style={{ padding: '4px 10px', fontSize: 11, borderRadius: 7, cursor: currentPage === Math.ceil(filteredIssues.length / PAGE_SIZE) ? 'default' : 'pointer', border: '1px solid rgba(0,0,0,0.09)', background: '#fff', color: currentPage === Math.ceil(filteredIssues.length / PAGE_SIZE) ? '#D0D4DD' : '#565B66' }}>Next →</div>
             </div>
           </div>
         </div>
@@ -839,7 +839,7 @@ export default function WorkQueue() {
       {/* ── VIEW 2: BATCH DETAIL ── */}
       {batchFilter && (
         <div>
-          <div onClick={() => setBatchFilter(null)} style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: 12, color: '#6b6880', cursor: 'pointer', marginBottom: 14, padding: '4px 8px', borderRadius: 6 }}>
+          <div onClick={() => setBatchFilter(null)} style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: 12, color: '#565B66', cursor: 'pointer', marginBottom: 14, padding: '4px 8px', borderRadius: 6 }}>
             ← Back to all issues
           </div>
 
@@ -854,43 +854,43 @@ export default function WorkQueue() {
             return (
               <div key={g.batchId} style={{ background: '#fff', border: '1px solid rgba(0,0,0,0.07)', borderRadius: 14, padding: '16px 20px', marginBottom: 14 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 14 }}>
-                  <div style={{ width: 38, height: 38, borderRadius: 9, background: '#ede9ff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <div style={{ width: 38, height: 38, borderRadius: 9, background: '#E6ECFA', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                     <span style={{ fontSize: 18 }}>📦</span>
                   </div>
                   <div style={{ flex: 1 }}>
-                    <div style={{ fontSize: 14, fontWeight: 700, color: '#0d0d12' }}>{g.shortLabel}</div>
-                    <div style={{ fontSize: 11, color: '#a09db8', marginTop: 2 }}>{g.batchId}</div>
+                    <div style={{ fontSize: 14, fontWeight: 700, color: '#12141A' }}>{g.shortLabel}</div>
+                    <div style={{ fontSize: 11, color: '#737985', marginTop: 2 }}>{g.batchId}</div>
                   </div>
-                  <span style={{ fontSize: 11, background: '#f0fdf4', color: '#166534', border: '1px solid #bbf7d0', padding: '4px 12px', borderRadius: 20, fontWeight: 500 }}>✓ Run complete</span>
+                  <span style={{ fontSize: 11, background: '#F0FAF4', color: '#15693B', border: '1px solid #B6EDD0', padding: '4px 12px', borderRadius: 20, fontWeight: 500 }}>✓ Run complete</span>
                 </div>
-                <div style={{ fontSize: 13, color: '#374151', marginBottom: 14, padding: '10px 14px', background: '#f8f7fc', borderRadius: 9, lineHeight: 1.6 }}>
-                  This batch found <strong style={{ color: '#0d0d12' }}>{batchIssues.length} issues</strong>
-                  {highCount > 0 && <> — <strong style={{ color: '#dc2626' }}>{highCount} HIGH</strong></>}
-                  {medCount > 0  && <>, <strong style={{ color: '#d97706' }}>{medCount} MEDIUM</strong></>}
-                  {lowCount > 0  && <>, <strong style={{ color: '#16a34a' }}>{lowCount} LOW</strong></>}
-                  {resolvedCnt > 0 && <> · <strong style={{ color: '#16a34a' }}>{resolvedCnt} resolved</strong></>}
+                <div style={{ fontSize: 13, color: '#374151', marginBottom: 14, padding: '10px 14px', background: '#F4F6FA', borderRadius: 9, lineHeight: 1.6 }}>
+                  This batch found <strong style={{ color: '#12141A' }}>{batchIssues.length} issues</strong>
+                  {highCount > 0 && <> — <strong style={{ color: '#D5493A' }}>{highCount} HIGH</strong></>}
+                  {medCount > 0  && <>, <strong style={{ color: '#D99E00' }}>{medCount} MEDIUM</strong></>}
+                  {lowCount > 0  && <>, <strong style={{ color: '#1E9E57' }}>{lowCount} LOW</strong></>}
+                  {resolvedCnt > 0 && <> · <strong style={{ color: '#1E9E57' }}>{resolvedCnt} resolved</strong></>}
                 </div>
                 <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 6, background: '#fef2f2', border: '1px solid #fecaca', borderRadius: 8, padding: '6px 12px' }}>
-                    <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#dc2626' }} />
-                    <span style={{ fontSize: 12, fontWeight: 700, color: '#dc2626' }}>{highCount}</span>
-                    <span style={{ fontSize: 11, color: '#dc2626' }}>High</span>
+                    <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#D5493A' }} />
+                    <span style={{ fontSize: 12, fontWeight: 700, color: '#D5493A' }}>{highCount}</span>
+                    <span style={{ fontSize: 11, color: '#D5493A' }}>High</span>
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 6, background: '#fffbeb', border: '1px solid #fde68a', borderRadius: 8, padding: '6px 12px' }}>
-                    <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#d97706' }} />
-                    <span style={{ fontSize: 12, fontWeight: 700, color: '#d97706' }}>{medCount}</span>
-                    <span style={{ fontSize: 11, color: '#d97706' }}>Medium</span>
+                    <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#D99E00' }} />
+                    <span style={{ fontSize: 12, fontWeight: 700, color: '#D99E00' }}>{medCount}</span>
+                    <span style={{ fontSize: 11, color: '#D99E00' }}>Medium</span>
                   </div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 6, background: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: 8, padding: '6px 12px' }}>
-                    <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#16a34a' }} />
-                    <span style={{ fontSize: 12, fontWeight: 700, color: '#16a34a' }}>{lowCount}</span>
-                    <span style={{ fontSize: 11, color: '#16a34a' }}>Low</span>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 6, background: '#F0FAF4', border: '1px solid #B6EDD0', borderRadius: 8, padding: '6px 12px' }}>
+                    <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#1E9E57' }} />
+                    <span style={{ fontSize: 12, fontWeight: 700, color: '#1E9E57' }}>{lowCount}</span>
+                    <span style={{ fontSize: 11, color: '#1E9E57' }}>Low</span>
                   </div>
                   {agentRun && (
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 6, background: '#f5f2ff', border: '1px solid #e0d9ff', borderRadius: 8, padding: '6px 12px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 6, background: '#F4F6FA', border: '1px solid #e0d9ff', borderRadius: 8, padding: '6px 12px' }}>
                       <span style={{ fontSize: 12 }}>⏱</span>
-                      <span style={{ fontSize: 12, fontWeight: 700, color: '#7c5dfa' }}>{agentRun.duration}</span>
-                      <span style={{ fontSize: 11, color: '#7c5dfa' }}>duration</span>
+                      <span style={{ fontSize: 12, fontWeight: 700, color: '#1F3A93' }}>{agentRun.duration}</span>
+                      <span style={{ fontSize: 11, color: '#1F3A93' }}>duration</span>
                     </div>
                   )}
                 </div>
@@ -901,38 +901,38 @@ export default function WorkQueue() {
           <div style={{ background: '#fff', border: '1px solid rgba(0,0,0,0.07)', borderRadius: 12, overflow: 'hidden' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 12 }}>
               <thead>
-                <tr style={{ background: '#f8f7fc' }}>
+                <tr style={{ background: '#F4F6FA' }}>
                   <th style={{ padding: '10px 12px', width: 36 }}><input type="checkbox" /></th>
-                  <th style={{ padding: '10px 12px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#6b6880' }}>Issue ID</th>
-                  <th style={{ padding: '10px 12px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#6b6880' }}>Provider</th>
-                  <th style={{ padding: '10px 12px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#6b6880' }}>NPI</th>
-                  <th style={{ padding: '10px 12px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#6b6880' }}>Type</th>
-                  <th style={{ padding: '10px 12px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#6b6880' }}>Priority</th>
-                  <th style={{ padding: '10px 12px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#6b6880' }}>Queue</th>
-                  <th style={{ padding: '10px 12px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#6b6880' }}>Status</th>
-                  <th style={{ padding: '10px 12px', textAlign: 'left', fontSize: 11, fontWeight: 600, cursor: 'pointer', color: '#7c5dfa' }}>Detected ▾</th>
-                  <th style={{ padding: '10px 12px', textAlign: 'center', fontSize: 11, fontWeight: 600, color: '#6b6880' }}>Prev Runs</th>
+                  <th style={{ padding: '10px 12px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#565B66' }}>Issue ID</th>
+                  <th style={{ padding: '10px 12px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#565B66' }}>Provider</th>
+                  <th style={{ padding: '10px 12px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#565B66' }}>NPI</th>
+                  <th style={{ padding: '10px 12px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#565B66' }}>Type</th>
+                  <th style={{ padding: '10px 12px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#565B66' }}>Priority</th>
+                  <th style={{ padding: '10px 12px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#565B66' }}>Queue</th>
+                  <th style={{ padding: '10px 12px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#565B66' }}>Status</th>
+                  <th style={{ padding: '10px 12px', textAlign: 'left', fontSize: 11, fontWeight: 600, cursor: 'pointer', color: '#1F3A93' }}>Detected ▾</th>
+                  <th style={{ padding: '10px 12px', textAlign: 'center', fontSize: 11, fontWeight: 600, color: '#565B66' }}>Prev Runs</th>
                 </tr>
               </thead>
               <tbody>
                 {filteredIssues.map(issue => (
                   <tr key={issue.sequence_id} onClick={() => setSelectedIssue(issue)} style={{ borderBottom: '1px solid rgba(0,0,0,0.05)', cursor: 'pointer' }}>
                     <td style={{ padding: '10px 12px' }} onClick={e => e.stopPropagation()}><input type="checkbox" /></td>
-                    <td style={{ padding: '10px 12px', color: '#7c5dfa', fontWeight: 600, fontSize: 11 }}><Highlight text={issue.sequence_id.split('-').slice(-2).join('-')} query={search} /></td>
+                    <td style={{ padding: '10px 12px', color: '#1F3A93', fontWeight: 600, fontSize: 11 }}><Highlight text={issue.sequence_id.split('-').slice(-2).join('-')} query={search} /></td>
                     <td style={{ padding: '10px 12px' }}>
                       <div style={{ fontWeight: 500 }}><Highlight text={issue.provider} query={search} /></div>
-                      <div style={{ fontSize: 10, color: '#a09db8' }}>{issue.specialty}</div>
+                      <div style={{ fontSize: 10, color: '#737985' }}>{issue.specialty}</div>
                     </td>
-                    <td style={{ padding: '10px 12px', color: '#6b6880' }}><Highlight text={issue.npi} query={search} /></td>
-                    <td style={{ padding: '10px 12px' }}><Tag label={ISSUE_TYPE_LABELS[issue.issue_type]} colors={typeColors[issue.issue_type] || '#f4f3f8|#6b6880'} /></td>
+                    <td style={{ padding: '10px 12px', color: '#565B66' }}><Highlight text={issue.npi} query={search} /></td>
+                    <td style={{ padding: '10px 12px' }}><Tag label={ISSUE_TYPE_LABELS[issue.issue_type]} colors={typeColors[issue.issue_type] || '#F4F6FA|#565B66'} /></td>
                     <td style={{ padding: '10px 12px' }}><Tag label={SEVERITY_LABELS[issue.severity]} colors={priColors[issue.severity]} /></td>
                     <td style={{ padding: '10px 12px' }}><Tag label={QUEUE_LABELS[issue.queue_name]} colors='#eff6ff|#1d4ed8' /></td>
                     <td style={{ padding: '10px 12px' }}><Tag label={statusDisplayLabel[issue.status] || issue.status} colors={statusColors[issue.status]} /></td>
-                    <td style={{ padding: '10px 12px', color: '#a09db8', fontSize: 11 }}>{new Date(issue.detectedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</td>
+                    <td style={{ padding: '10px 12px', color: '#737985', fontSize: 11 }}>{new Date(issue.detectedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</td>
                     <td style={{ padding: '10px 8px', textAlign: 'center' }} onClick={e => e.stopPropagation()}>
                       <button
                         onClick={() => setPrevRunsId({ id: issue.sequence_id, issue })}
-                        style={{ display: 'inline-flex', alignItems: 'center', gap: 4, padding: '5px 10px', background: '#f0eef8', color: '#7c5dfa', border: '1px solid rgba(124,93,250,0.25)', borderRadius: 7, fontSize: 11, fontWeight: 500, cursor: 'pointer', whiteSpace: 'nowrap' }}
+                        style={{ display: 'inline-flex', alignItems: 'center', gap: 4, padding: '5px 10px', background: '#F4F6FA', color: '#1F3A93', border: '1px solid rgba(124,93,250,0.25)', borderRadius: 7, fontSize: 11, fontWeight: 500, cursor: 'pointer', whiteSpace: 'nowrap' }}
                       >
                         🕐 Previous
                       </button>
@@ -945,7 +945,7 @@ export default function WorkQueue() {
               <EmptyState search={search} typeFilter={typeFilter} priorityFilter={priorityFilter} dateLabel={dateLabel}
                 onClear={() => { setSearch(''); setTypeFilter('All types'); setPriorityFilter('All priorities'); setDateLabel('All dates') }} />
             )}
-            <div style={{ padding: '10px 18px', borderTop: '1px solid rgba(0,0,0,0.05)', fontSize: 11, color: '#a09db8' }}>
+            <div style={{ padding: '10px 18px', borderTop: '1px solid rgba(0,0,0,0.05)', fontSize: 11, color: '#737985' }}>
               Showing {filteredIssues.length} issues in this batch
             </div>
           </div>

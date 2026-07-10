@@ -3,8 +3,8 @@ import { useState, useEffect } from 'react'
 const API = 'http://localhost:3003'
 
 const iconMap: Record<string, { bg: string; color: string; icon: string }> = {
-  accept:  { bg: '#f0fdf4', color: '#166534', icon: '✓' },
-  reject:  { bg: '#fff1f1', color: '#c0392b', icon: '✕' },
+  accept:  { bg: '#F0FAF4', color: '#15693B', icon: '✓' },
+  reject:  { bg: '#fff1f1', color: '#D5493A', icon: '✕' },
   system:  { bg: '#faf5ff', color: '#6d28d9', icon: '⚙' },
   flag:    { bg: '#fff7ed', color: '#b45309', icon: '⚑' },
 }
@@ -39,19 +39,19 @@ function exportPDF(logs: AuditLog[]) {
   const html = `
     <html><head><title>ProviderGuard AI — Audit Trail</title>
     <style>
-      body { font-family: system-ui, sans-serif; padding: 32px; color: #0d0d12; }
+      body { font-family: system-ui, sans-serif; padding: 32px; color: #12141A; }
       h1 { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
-      .meta { font-size: 12px; color: #6b6880; margin-bottom: 24px; }
-      .notice { background: #f5f2ff; border: 1px solid #e0d9ff; border-radius: 8px; padding: 10px 14px; font-size: 12px; color: #5b21b6; margin-bottom: 20px; }
+      .meta { font-size: 12px; color: #565B66; margin-bottom: 24px; }
+      .notice { background: #F4F6FA; border: 1px solid #e0d9ff; border-radius: 8px; padding: 10px 14px; font-size: 12px; color: #5b21b6; margin-bottom: 20px; }
       table { width: 100%; border-collapse: collapse; font-size: 12px; }
-      th { background: #f8f7fc; padding: 9px 12px; text-align: left; font-weight: 600; color: #6b6880; border-bottom: 1px solid #e5e3f0; }
-      td { padding: 9px 12px; border-bottom: 1px solid #f0eef8; vertical-align: top; }
+      th { background: #F4F6FA; padding: 9px 12px; text-align: left; font-weight: 600; color: #565B66; border-bottom: 1px solid #e5e3f0; }
+      td { padding: 9px 12px; border-bottom: 1px solid #F4F6FA; vertical-align: top; }
       .badge { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 10px; font-weight: 600; }
-      .accept { background: #f0fdf4; color: #166534; }
-      .reject { background: #fff1f1; color: #c0392b; }
+      .accept { background: #F0FAF4; color: #15693B; }
+      .reject { background: #fff1f1; color: #D5493A; }
       .system { background: #faf5ff; color: #6d28d9; }
       .flag   { background: #fff7ed; color: #b45309; }
-      .footer { margin-top: 32px; font-size: 11px; color: #a09db8; text-align: center; border-top: 1px solid #f0eef8; padding-top: 16px; }
+      .footer { margin-top: 32px; font-size: 11px; color: #737985; text-align: center; border-top: 1px solid #F4F6FA; padding-top: 16px; }
     </style></head><body>
     <h1>ProviderGuard AI — Audit Trail</h1>
     <div class="meta">Generated: ${new Date().toLocaleString()} · Infinite Computer Solutions</div>
@@ -65,7 +65,7 @@ function exportPDF(logs: AuditLog[]) {
             <td><span class="badge ${l.type}">${l.action}</span></td>
             <td>${l.user || l.performed_by || 'System'}</td>
             <td>${l.detail || l.details || ''}</td>
-            <td style="white-space:nowrap;color:#a09db8">${l.time}</td>
+            <td style="white-space:nowrap;color:#737985">${l.time}</td>
           </tr>`).join('')}
       </tbody>
     </table>
@@ -111,15 +111,15 @@ export default function AuditTrail() {
   })
 
   return (
-    <div style={{ flex: 1, overflowY: 'auto', padding: '20px 24px', background: '#f0eef8' }}>
+    <div style={{ flex: 1, overflowY: 'auto', padding: '20px 24px', background: '#F4F6FA' }}>
 
       {/* TOPBAR */}
       <div style={{ background: '#fff', borderRadius: 12, padding: '12px 18px', marginBottom: 18, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <div>
-          <div style={{ fontSize: 15, fontWeight: 600, color: '#0d0d12' }}>Audit Trail</div>
-          <div style={{ fontSize: 11, color: '#a09db8', marginTop: 1 }}>Immutable activity log — all actions recorded</div>
+          <div style={{ fontSize: 15, fontWeight: 600, color: '#12141A' }}>Audit Trail</div>
+          <div style={{ fontSize: 11, color: '#737985', marginTop: 1 }}>Immutable activity log — all actions recorded</div>
         </div>
-        {loading && <span style={{ fontSize: 11, color: '#7c5dfa', background: '#ede9ff', padding: '4px 12px', borderRadius: 20 }}>⟳ Loading from database…</span>}
+        {loading && <span style={{ fontSize: 11, color: '#1F3A93', background: '#E6ECFA', padding: '4px 12px', borderRadius: 20 }}>⟳ Loading from database…</span>}
       </div>
 
       {/* FILTERS */}
@@ -129,9 +129,9 @@ export default function AuditTrail() {
           placeholder="Search by issue ID, user or action…"
           value={search}
           onChange={e => setSearch(e.target.value)}
-          style={{ flex: 1, minWidth: 200, padding: '7px 11px', border: '1px solid rgba(0,0,0,0.09)', borderRadius: 8, fontSize: 12, background: '#fff', color: '#0d0d12', outline: 'none' }}
+          style={{ flex: 1, minWidth: 200, padding: '7px 11px', border: '1px solid rgba(0,0,0,0.09)', borderRadius: 8, fontSize: 12, background: '#fff', color: '#12141A', outline: 'none' }}
         />
-        <select value={filterAction} onChange={e => setFilterAction(e.target.value)} style={{ fontSize: 12, padding: '7px 11px', border: '1px solid rgba(0,0,0,0.09)', borderRadius: 8, background: '#fff', color: '#0d0d12', height: 34, outline: 'none' }}>
+        <select value={filterAction} onChange={e => setFilterAction(e.target.value)} style={{ fontSize: 12, padding: '7px 11px', border: '1px solid rgba(0,0,0,0.09)', borderRadius: 8, background: '#fff', color: '#12141A', height: 34, outline: 'none' }}>
           <option>All actions</option>
           <option>Accepted</option>
           <option>False Positive</option>
@@ -141,29 +141,29 @@ export default function AuditTrail() {
           <option>Resolved</option>
           <option>OPEN</option>
         </select>
-        <select value={filterDate} onChange={e => setFilterDate(e.target.value)} style={{ fontSize: 12, padding: '7px 11px', border: '1px solid rgba(0,0,0,0.09)', borderRadius: 8, background: '#fff', color: '#0d0d12', height: 34, outline: 'none' }}>
+        <select value={filterDate} onChange={e => setFilterDate(e.target.value)} style={{ fontSize: 12, padding: '7px 11px', border: '1px solid rgba(0,0,0,0.09)', borderRadius: 8, background: '#fff', color: '#12141A', height: 34, outline: 'none' }}>
           <option>Last 7 days</option>
           <option>Today</option>
           <option>Last 30 days</option>
         </select>
         <button
           onClick={() => exportCSV(filtered)}
-          style={{ padding: '7px 14px', background: '#fff', color: '#6b6880', border: '1px solid rgba(0,0,0,0.09)', borderRadius: 8, fontSize: 12, fontWeight: 500, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 5 }}
+          style={{ padding: '7px 14px', background: '#fff', color: '#565B66', border: '1px solid rgba(0,0,0,0.09)', borderRadius: 8, fontSize: 12, fontWeight: 500, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 5 }}
         >
           ↓ CSV
         </button>
         <button
           onClick={() => exportPDF(filtered)}
           disabled={exporting}
-          style={{ padding: '7px 14px', background: exporting ? '#ede9ff' : '#7c5dfa', color: exporting ? '#7c5dfa' : '#fff', border: 'none', borderRadius: 8, fontSize: 12, fontWeight: 500, cursor: exporting ? 'default' : 'pointer', display: 'flex', alignItems: 'center', gap: 5 }}
+          style={{ padding: '7px 14px', background: exporting ? '#E6ECFA' : '#1F3A93', color: exporting ? '#1F3A93' : '#fff', border: 'none', borderRadius: 8, fontSize: 12, fontWeight: 500, cursor: exporting ? 'default' : 'pointer', display: 'flex', alignItems: 'center', gap: 5 }}
         >
           {exporting ? '⏳ Generating…' : '↓ Export PDF'}
         </button>
       </div>
 
       {/* IMMUTABLE NOTICE */}
-      <div style={{ background: '#faf9fe', border: '1px solid rgba(124,93,250,0.15)', borderRadius: 10, padding: '9px 14px', marginBottom: 14, fontSize: 11, color: '#6b6880', display: 'flex', alignItems: 'center', gap: 6 }}>
-        <span style={{ color: '#7c5dfa', fontSize: 14 }}>🔒</span>
+      <div style={{ background: '#F4F6FA', border: '1px solid rgba(124,93,250,0.15)', borderRadius: 10, padding: '9px 14px', marginBottom: 14, fontSize: 11, color: '#565B66', display: 'flex', alignItems: 'center', gap: 6 }}>
+        <span style={{ color: '#1F3A93', fontSize: 14 }}>🔒</span>
         Immutable log — entries cannot be altered or deleted without System Admin access
       </div>
 
@@ -172,15 +172,15 @@ export default function AuditTrail() {
         {loading ? (
           [1,2,3,4].map(n => (
             <div key={n} style={{ display: 'flex', gap: 12, padding: '14px 18px', borderBottom: '1px solid rgba(0,0,0,0.05)', alignItems: 'flex-start' }}>
-              <div style={{ width: 32, height: 32, borderRadius: '50%', background: '#f4f3f8', flexShrink: 0 }} />
+              <div style={{ width: 32, height: 32, borderRadius: '50%', background: '#F4F6FA', flexShrink: 0 }} />
               <div style={{ flex: 1 }}>
-                <div style={{ width: 200, height: 13, background: '#f4f3f8', borderRadius: 6, marginBottom: 8 }} />
-                <div style={{ width: '80%', height: 11, background: '#f8f7fc', borderRadius: 6 }} />
+                <div style={{ width: 200, height: 13, background: '#F4F6FA', borderRadius: 6, marginBottom: 8 }} />
+                <div style={{ width: '80%', height: 11, background: '#F4F6FA', borderRadius: 6 }} />
               </div>
             </div>
           ))
         ) : filtered.length === 0 ? (
-          <div style={{ padding: 40, textAlign: 'center', color: '#a09db8', fontSize: 13 }}>No audit log entries found</div>
+          <div style={{ padding: 40, textAlign: 'center', color: '#737985', fontSize: 13 }}>No audit log entries found</div>
         ) : (
           filtered.map((log, idx) => {
             const ic = iconMap[log.type] || iconMap.system
@@ -194,25 +194,25 @@ export default function AuditTrail() {
                 <div style={{ flex: 1 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 3 }}>
                     {log.issueId && log.issueId !== 'SYSTEM' && (
-                      <span style={{ fontSize: 11, fontWeight: 700, color: '#7c5dfa' }}>{log.issueId}</span>
+                      <span style={{ fontSize: 11, fontWeight: 700, color: '#1F3A93' }}>{log.issueId}</span>
                     )}
                     {log.batch_id && (
-                      <span style={{ fontSize: 10, color: '#a09db8', background: '#f4f3f8', padding: '1px 6px', borderRadius: 10 }}>{log.batch_id.replace('PDM_Monitor_', 'PDM-')}</span>
+                      <span style={{ fontSize: 10, color: '#737985', background: '#F4F6FA', padding: '1px 6px', borderRadius: 10 }}>{log.batch_id.replace('PDM_Monitor_', 'PDM-')}</span>
                     )}
-                    <span style={{ fontSize: 12, fontWeight: 500, color: '#0d0d12' }}>{log.action}</span>
+                    <span style={{ fontSize: 12, fontWeight: 500, color: '#12141A' }}>{log.action}</span>
                     <span style={{ fontSize: 10, fontWeight: 500, padding: '2px 8px', borderRadius: 20, background: ic.bg, color: ic.color }}>{log.action}</span>
                   </div>
                   <div style={{ fontSize: 12, color: '#4a4560', lineHeight: 1.5 }}>{displayDetail}</div>
-                  <div style={{ fontSize: 11, color: '#a09db8', marginTop: 3 }}>{displayUser}</div>
+                  <div style={{ fontSize: 11, color: '#737985', marginTop: 3 }}>{displayUser}</div>
                 </div>
-                <div style={{ fontSize: 11, color: '#a09db8', whiteSpace: 'nowrap', marginTop: 3 }}>{log.time}</div>
+                <div style={{ fontSize: 11, color: '#737985', whiteSpace: 'nowrap', marginTop: 3 }}>{log.time}</div>
               </div>
             )
           })
         )}
       </div>
 
-      <div style={{ marginTop: 10, fontSize: 11, color: '#a09db8', textAlign: 'right' }}>
+      <div style={{ marginTop: 10, fontSize: 11, color: '#737985', textAlign: 'right' }}>
         Showing {filtered.length} of {logs.length} entries
       </div>
 

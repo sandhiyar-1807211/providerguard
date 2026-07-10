@@ -1,0 +1,246 @@
+/* ============================================================
+   Infinite & Senzai Design System — Tokens
+   Import this file wherever you need brand-accurate variables.
+   ============================================================ */
+
+/* ----- Fonts (Google Fonts substitution — see README CAVEATS) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  /* --- BRAND / PRIMARY ----------------------------------------- */
+  --infinite-blue-900: #0E2A6B;
+  --infinite-blue-800: #14337F;
+  --infinite-blue-700: #1F3A93;   /* primary brand */
+  --infinite-blue-600: #2A55B8;
+  --infinite-blue-500: #3E6FD9;
+  --infinite-blue-100: #E6ECFA;
+  --infinite-blue-50:  #F4F6FA;
+
+  --infinite-teal:     #17A2B8;
+
+  /* --- SENZAI (sampled from official logo) -------------------- */
+  /* Logo gradient: deep navy → mid blue → teal cyan */
+  --senzai-navy:       #152670;   /* logo dark */
+  --senzai-blue:       #2A3375;   /* wordmark */
+  --senzai-mid:        #2B75A9;   /* gradient mid */
+  --senzai-teal:       #47B1BF;   /* logo accent */
+  --senzai-teal-bright:#5DC8D6;   /* hover/glow */
+
+  --senzai-gradient:        linear-gradient(135deg, #152670 0%, #2A3375 35%, #2B75A9 70%, #47B1BF 100%);
+  --senzai-gradient-soft:   linear-gradient(135deg, rgba(21,38,112,.95) 0%, rgba(71,177,191,.85) 100%);
+  --senzai-gradient-vert:   linear-gradient(180deg, #152670 0%, #47B1BF 100%);
+  --senzai-gradient-text:   linear-gradient(135deg, #152670 0%, #2B75A9 60%, #47B1BF 100%);
+
+  /* Surfaces — Senzai is light-primary, dark optional */
+  --senzai-surface:    #FFFFFF;
+  --senzai-surface-2:  #F5F8FB;
+  --senzai-surface-3:  #EAF1F6;
+  --senzai-fg:         #0E1A3D;       /* on light */
+  --senzai-fg-muted:   #475371;
+
+  /* Dark variant */
+  --senzai-dark-bg:    #0A1230;
+  --senzai-dark-panel: #131F4A;
+  --senzai-dark-panel-2:#1B2960;
+  --senzai-dark-border:#27356E;
+  --senzai-dark-fg:    #E8EEFB;
+  --senzai-dark-fg-muted:#9AA8CE;
+
+  /* --- NEUTRALS (shared) -------------------------------------- */
+  --n-0:   #FFFFFF;
+  --n-25:  #FAFAFB;
+  --n-50:  #F4F6FA;
+  --n-100: #EEF0F5;
+  --n-200: #E6E8EE;
+  --n-300: #D0D4DD;
+  --n-400: #A4AAB8;
+  --n-500: #737985;
+  --n-600: #565B66;
+  --n-700: #3A3E47;
+  --n-800: #23262D;
+  --n-900: #12141A;
+  --n-1000:#0A0A0F;
+
+  /* --- SEMANTIC (mapped to Infinite defaults) ----------------- */
+  --fg-1: var(--n-900);   /* primary text */
+  --fg-2: var(--n-600);   /* secondary text */
+  --fg-3: var(--n-500);   /* tertiary / helper */
+  --fg-inv: var(--n-0);   /* on-dark / on-primary */
+
+  --bg-1: var(--n-0);     /* page */
+  --bg-2: var(--n-50);    /* section tint */
+  --bg-3: var(--n-100);
+  --bg-inv: var(--infinite-blue-900);
+
+  --border-1: var(--n-200);
+  --border-2: var(--n-300);
+
+  --accent:         var(--infinite-blue-700);
+  --accent-hover:   var(--infinite-blue-800);
+  --accent-pressed: var(--infinite-blue-900);
+  --accent-soft:    var(--infinite-blue-100);
+
+  --success: #1E9E57;
+  --warning: #D99E00;
+  --danger:  #D5493A;
+
+  /* --- TYPE --------------------------------------------------- */
+  --font-sans:    'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  --font-display: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, SFMono-Regular, Consolas, monospace;
+
+  --fw-regular: 400;
+  --fw-medium:  500;
+  --fw-semi:    600;
+  --fw-bold:    700;
+  --fw-black:   800;
+
+  --fs-display-xl: 72px;
+  --fs-display-lg: 56px;
+  --fs-display-md: 44px;
+  --fs-h1: 36px;
+  --fs-h2: 28px;
+  --fs-h3: 22px;
+  --fs-h4: 18px;
+  --fs-body-lg: 18px;
+  --fs-body: 16px;
+  --fs-body-sm: 14px;
+  --fs-caption: 12px;
+  --fs-overline: 11px;
+
+  --lh-tight: 1.1;
+  --lh-snug:  1.25;
+  --lh-base:  1.5;
+  --lh-loose: 1.7;
+
+  --ls-display: -0.02em;
+  --ls-heading: -0.01em;
+  --ls-body: 0;
+  --ls-overline: 0.12em;
+
+  /* --- SPACING (4px base) ------------------------------------- */
+  --sp-0: 0;
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+  --sp-9: 96px;
+  --sp-10:128px;
+
+  /* --- RADII -------------------------------------------------- */
+  --r-xs: 2px;
+  --r-sm: 4px;
+  --r-md: 8px;
+  --r-lg: 12px;
+  --r-xl: 16px;
+  --r-2xl: 24px;
+  --r-pill: 999px;
+
+  /* --- SHADOWS ------------------------------------------------ */
+  --shadow-xs: 0 1px 2px rgba(20,24,40,.05);
+  --shadow-sm: 0 1px 2px rgba(20,24,40,.04), 0 2px 4px rgba(20,24,40,.04);
+  --shadow-md: 0 1px 2px rgba(20,24,40,.04), 0 6px 16px rgba(20,24,40,.06);
+  --shadow-lg: 0 2px 4px rgba(20,24,40,.05), 0 16px 40px rgba(20,24,40,.10);
+  --shadow-focus: 0 0 0 3px rgba(31,58,147,.25);
+  --shadow-senzai-glow: 0 0 0 1px rgba(71,177,191,.35), 0 8px 28px -6px rgba(21,38,112,.45);
+  --shadow-senzai-card: 0 1px 2px rgba(21,38,112,.06), 0 12px 32px -8px rgba(21,38,112,.16);
+
+  /* --- MOTION ------------------------------------------------- */
+  --ease-out:   cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast:   120ms;
+  --dur-base:   200ms;
+  --dur-slow:   320ms;
+
+  /* --- LAYOUT ------------------------------------------------- */
+  --container-sm: 720px;
+  --container-md: 960px;
+  --container-lg: 1120px;
+  --container-xl: 1280px;
+}
+
+/* ---------- Semantic element styles ---------- */
+html, body {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: var(--lh-base);
+  color: var(--fg-1);
+  background: var(--bg-1);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, .h1 {
+  font-family: var(--font-display);
+  font-size: var(--fs-display-md);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-display);
+  margin: 0 0 var(--sp-5);
+}
+h2, .h2 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-semi);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--ls-heading);
+  margin: 0 0 var(--sp-4);
+}
+h3, .h3 {
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-semi);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--ls-heading);
+  margin: 0 0 var(--sp-4);
+}
+h4, .h4 {
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-semi);
+  line-height: var(--lh-snug);
+  margin: 0 0 var(--sp-3);
+}
+p { margin: 0 0 var(--sp-4); color: var(--fg-1); }
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: var(--accent-hover); text-decoration: underline; }
+
+.overline {
+  font-size: var(--fs-overline);
+  letter-spacing: var(--ls-overline);
+  text-transform: uppercase;
+  font-weight: var(--fw-semi);
+  color: var(--fg-2);
+}
+
+code, pre, .mono { font-family: var(--font-mono); font-size: 0.92em; }
+
+/* ---------- Senzai surface helpers ---------- */
+.senzai-surface {                       /* light-primary */
+  background: var(--senzai-surface);
+  color: var(--senzai-fg);
+}
+.senzai-surface-tinted {
+  background:
+    radial-gradient(120% 80% at 100% 0%, rgba(71,177,191,.10) 0%, transparent 60%),
+    radial-gradient(80% 60% at 0% 100%, rgba(21,38,112,.06) 0%, transparent 60%),
+    var(--senzai-surface);
+  color: var(--senzai-fg);
+}
+.senzai-surface-dark {                  /* dark optional */
+  background: var(--senzai-dark-bg);
+  color: var(--senzai-dark-fg);
+}
+.senzai-surface-dark h1,
+.senzai-surface-dark h2,
+.senzai-surface-dark h3 { color: var(--senzai-dark-fg); }
+.senzai-surface-dark p { color: var(--senzai-dark-fg-muted); }
+
+.senzai-text-gradient {
+  background: var(--senzai-gradient-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}

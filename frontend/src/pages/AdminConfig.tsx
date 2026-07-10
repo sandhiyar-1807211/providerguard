@@ -10,10 +10,10 @@ const initialRules = [
 ]
 
 const routingConfig = [
-  { type: 'Duplicate record', queue: 'Provider Ops', priority: 'High', priColor: '#fff1f1|#c0392b' },
+  { type: 'Duplicate record', queue: 'Provider Ops', priority: 'High', priColor: '#fff1f1|#D5493A' },
   { type: 'Conflict detected', queue: 'Provider Ops', priority: 'Medium', priColor: '#fff7ed|#b45309' },
-  { type: 'Directory mismatch', queue: 'Directory Ops', priority: 'High', priColor: '#fff1f1|#c0392b' },
-  { type: 'Compliance flag', queue: 'Compliance', priority: 'High', priColor: '#fff1f1|#c0392b' },
+  { type: 'Directory mismatch', queue: 'Directory Ops', priority: 'High', priColor: '#fff1f1|#D5493A' },
+  { type: 'Compliance flag', queue: 'Compliance', priority: 'High', priColor: '#fff1f1|#D5493A' },
   { type: 'Claims mismatch', queue: 'Provider Ops', priority: 'Medium', priColor: '#fff7ed|#b45309' },
 ]
 
@@ -32,7 +32,7 @@ function Tag({ label, colors }: { label: string; colors: string }) {
 
 function Toggle({ enabled, onToggle }: { enabled: boolean; onToggle: () => void }) {
   return (
-    <div onClick={onToggle} style={{ width: 38, height: 21, borderRadius: 11, background: enabled ? '#7c5dfa' : '#e5e3f0', position: 'relative', cursor: 'pointer', flexShrink: 0, transition: 'background 0.2s' }}>
+    <div onClick={onToggle} style={{ width: 38, height: 21, borderRadius: 11, background: enabled ? '#1F3A93' : '#e5e3f0', position: 'relative', cursor: 'pointer', flexShrink: 0, transition: 'background 0.2s' }}>
       <div style={{ position: 'absolute', width: 15, height: 15, background: '#fff', borderRadius: '50%', top: 3, left: enabled ? 20 : 3, transition: 'left 0.2s' }} />
     </div>
   )
@@ -46,12 +46,12 @@ export default function AdminConfig() {
   }
 
   return (
-    <div style={{ flex: 1, overflowY: 'auto', padding: '20px 24px', background: '#f0eef8' }}>
+    <div style={{ flex: 1, overflowY: 'auto', padding: '20px 24px', background: '#F4F6FA' }}>
 
       {/* TOPBAR */}
       <div style={{ background: '#fff', borderRadius: 12, padding: '12px 18px', marginBottom: 18 }}>
-        <div style={{ fontSize: 15, fontWeight: 600, color: '#0d0d12' }}>Admin Config</div>
-        <div style={{ fontSize: 11, color: '#a09db8', marginTop: 1 }}>Rules, routing and schedule configuration — System Admin only</div>
+        <div style={{ fontSize: 15, fontWeight: 600, color: '#12141A' }}>Admin Config</div>
+        <div style={{ fontSize: 11, color: '#737985', marginTop: 1 }}>Rules, routing and schedule configuration — System Admin only</div>
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
@@ -59,34 +59,34 @@ export default function AdminConfig() {
         {/* LEFT COLUMN */}
         <div>
           {/* DETECTION RULES */}
-          <div style={{ fontSize: 13, fontWeight: 600, color: '#0d0d12', marginBottom: 12 }}>Detection rules</div>
+          <div style={{ fontSize: 13, fontWeight: 600, color: '#12141A', marginBottom: 12 }}>Detection rules</div>
           {rules.map(rule => (
             <div key={rule.id} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 14px', border: '1px solid rgba(0,0,0,0.07)', borderRadius: 10, marginBottom: 8, background: '#fff' }}>
               <div style={{ flex: 1 }}>
-                <div style={{ fontSize: 12, fontWeight: 500, color: '#0d0d12' }}>{rule.name}</div>
-                <div style={{ fontSize: 11, color: '#6b6880', marginTop: 2 }}>{rule.desc} — <span style={{ color: '#7c5dfa' }}>{rule.req}</span></div>
+                <div style={{ fontSize: 12, fontWeight: 500, color: '#12141A' }}>{rule.name}</div>
+                <div style={{ fontSize: 11, color: '#565B66', marginTop: 2 }}>{rule.desc} — <span style={{ color: '#1F3A93' }}>{rule.req}</span></div>
               </div>
               <Toggle enabled={rule.enabled} onToggle={() => toggleRule(rule.id)} />
             </div>
           ))}
 
           {/* ROLES */}
-          <div style={{ fontSize: 13, fontWeight: 600, color: '#0d0d12', marginBottom: 12, marginTop: 20 }}>Role management</div>
+          <div style={{ fontSize: 13, fontWeight: 600, color: '#12141A', marginBottom: 12, marginTop: 20 }}>Role management</div>
           <div style={{ background: '#fff', border: '1px solid rgba(0,0,0,0.07)', borderRadius: 12, overflow: 'hidden' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 12 }}>
               <thead>
-                <tr style={{ background: '#f8f7fc' }}>
-                  <th style={{ padding: '9px 14px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#6b6880', borderBottom: '1px solid rgba(0,0,0,0.07)' }}>Role</th>
-                  <th style={{ padding: '9px 14px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#6b6880', borderBottom: '1px solid rgba(0,0,0,0.07)' }}>Users</th>
-                  <th style={{ padding: '9px 14px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#6b6880', borderBottom: '1px solid rgba(0,0,0,0.07)' }}>Access</th>
+                <tr style={{ background: '#F4F6FA' }}>
+                  <th style={{ padding: '9px 14px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#565B66', borderBottom: '1px solid rgba(0,0,0,0.07)' }}>Role</th>
+                  <th style={{ padding: '9px 14px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#565B66', borderBottom: '1px solid rgba(0,0,0,0.07)' }}>Users</th>
+                  <th style={{ padding: '9px 14px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#565B66', borderBottom: '1px solid rgba(0,0,0,0.07)' }}>Access</th>
                 </tr>
               </thead>
               <tbody>
                 {roles.map((r, i) => (
                   <tr key={r.role} style={{ borderBottom: i < roles.length - 1 ? '1px solid rgba(0,0,0,0.05)' : 'none' }}>
                     <td style={{ padding: '10px 14px', fontWeight: 500 }}>{r.role}</td>
-                    <td style={{ padding: '10px 14px', color: '#6b6880' }}>{r.users}</td>
-                    <td style={{ padding: '10px 14px', color: '#6b6880', fontSize: 11 }}>{r.access}</td>
+                    <td style={{ padding: '10px 14px', color: '#565B66' }}>{r.users}</td>
+                    <td style={{ padding: '10px 14px', color: '#565B66', fontSize: 11 }}>{r.access}</td>
                   </tr>
                 ))}
               </tbody>
@@ -97,14 +97,14 @@ export default function AdminConfig() {
         {/* RIGHT COLUMN */}
         <div>
           {/* QUEUE ROUTING */}
-          <div style={{ fontSize: 13, fontWeight: 600, color: '#0d0d12', marginBottom: 12 }}>Queue routing config</div>
+          <div style={{ fontSize: 13, fontWeight: 600, color: '#12141A', marginBottom: 12 }}>Queue routing config</div>
           <div style={{ background: '#fff', border: '1px solid rgba(0,0,0,0.07)', borderRadius: 12, overflow: 'hidden', marginBottom: 16 }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 12 }}>
               <thead>
-                <tr style={{ background: '#f8f7fc' }}>
-                  <th style={{ padding: '9px 14px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#6b6880', borderBottom: '1px solid rgba(0,0,0,0.07)' }}>Issue type</th>
-                  <th style={{ padding: '9px 14px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#6b6880', borderBottom: '1px solid rgba(0,0,0,0.07)' }}>Routes to</th>
-                  <th style={{ padding: '9px 14px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#6b6880', borderBottom: '1px solid rgba(0,0,0,0.07)' }}>Priority</th>
+                <tr style={{ background: '#F4F6FA' }}>
+                  <th style={{ padding: '9px 14px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#565B66', borderBottom: '1px solid rgba(0,0,0,0.07)' }}>Issue type</th>
+                  <th style={{ padding: '9px 14px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#565B66', borderBottom: '1px solid rgba(0,0,0,0.07)' }}>Routes to</th>
+                  <th style={{ padding: '9px 14px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#565B66', borderBottom: '1px solid rgba(0,0,0,0.07)' }}>Priority</th>
                 </tr>
               </thead>
               <tbody>
@@ -120,7 +120,7 @@ export default function AdminConfig() {
           </div>
 
           {/* SYSTEM INFO */}
-          <div style={{ fontSize: 13, fontWeight: 600, color: '#0d0d12', marginBottom: 12, marginTop: 20 }}>System info</div>
+          <div style={{ fontSize: 13, fontWeight: 600, color: '#12141A', marginBottom: 12, marginTop: 20 }}>System info</div>
           <div style={{ background: '#fff', border: '1px solid rgba(0,0,0,0.07)', borderRadius: 12, padding: '14px 16px' }}>
             {[
               { key: 'Environment', val: 'UAT' },
@@ -130,8 +130,8 @@ export default function AdminConfig() {
               { key: 'PHI exposure', val: 'None — masked' },
             ].map((item, i, arr) => (
               <div key={item.key} style={{ display: 'flex', justifyContent: 'space-between', padding: '7px 0', borderBottom: i < arr.length - 1 ? '1px solid rgba(0,0,0,0.05)' : 'none', fontSize: 12 }}>
-                <span style={{ color: '#6b6880' }}>{item.key}</span>
-                <span style={{ fontWeight: 500, color: item.key === 'PHI exposure' ? '#166534' : '#0d0d12' }}>{item.val}</span>
+                <span style={{ color: '#565B66' }}>{item.key}</span>
+                <span style={{ fontWeight: 500, color: item.key === 'PHI exposure' ? '#15693B' : '#12141A' }}>{item.val}</span>
               </div>
             ))}
           </div>

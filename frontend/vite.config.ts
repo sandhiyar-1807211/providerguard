@@ -4,6 +4,7 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  server: { port: 5175 },
   resolve: {
     dedupe: ['react', 'react-dom', 'react-router-dom'],
   },

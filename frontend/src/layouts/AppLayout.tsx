@@ -13,9 +13,9 @@ const navItems = [
 // alerts will be loaded from live API
 
 const severityColor: Record<string, string> = {
-  HIGH:   '#dc2626',
-  MEDIUM: '#d97706',
-  LOW:    '#16a34a',
+  HIGH:   '#D5493A',
+  MEDIUM: '#D99E00',
+  LOW:    '#1E9E57',
 }
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
@@ -79,7 +79,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', width: '100vw', overflow: 'hidden', fontFamily: 'system-ui, sans-serif' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', width: '100vw', overflow: 'hidden', fontFamily: 'Inter, system-ui, sans-serif' }}>
 
       {/* ── TOP NAV ── */}
       <nav style={{
@@ -96,11 +96,11 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 
         {/* Brand */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginRight: 40, flexShrink: 0 }}>
-          <div style={{ width: 40, height: 40, background: '#6366f1', borderRadius: 11, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ width: 40, height: 40, background: 'linear-gradient(135deg, #152670 0%, #2B75A9 70%, #47B1BF 100%)', borderRadius: 11, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <Shield size={20} color="#fff" strokeWidth={2} />
           </div>
           <div style={{ lineHeight: 1 }}>
-            <div style={{ fontSize: 16, fontWeight: 700, color: '#1e1b4b', letterSpacing: '-0.3px' }}>ProviderGuard AI</div>
+            <div style={{ fontSize: 16, fontWeight: 700, color: '#0E2A6B', letterSpacing: '-0.3px' }}>ProviderGuard AI</div>
             <div style={{ fontSize: 10, color: '#9ca3af', marginTop: 3, letterSpacing: '0.4px' }}>Infinite Computer Solutions</div>
           </div>
         </div>
@@ -128,19 +128,19 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                   cursor: 'pointer',
                   fontSize: 14,
                   fontWeight: isActive ? 600 : 500,
-                  color: isActive ? '#4338ca' : isHovered ? '#1f2937' : '#4b5563',
-                  background: isActive ? '#eef2ff' : isHovered ? '#f3f4f6' : 'transparent',
+                  color: isActive ? '#14337F' : isHovered ? '#1f2937' : '#4b5563',
+                  background: isActive ? '#E6ECFA' : isHovered ? '#f3f4f6' : 'transparent',
                   transition: 'background 0.15s, color 0.15s',
                   whiteSpace: 'nowrap',
                 }}>
                   <span style={{ fontSize: 16 }}>{item.icon}</span>
                   <span>{item.label}</span>
                   {item.label === 'Work Queue' && openCount > 0 ? (
-                    <span style={{ background: '#dc2626', color: '#fff', fontSize: 10, fontWeight: 700, padding: '2px 7px', borderRadius: 20 }}>
+                    <span style={{ background: '#D5493A', color: '#fff', fontSize: 10, fontWeight: 700, padding: '2px 7px', borderRadius: 20 }}>
                       {openCount}
                     </span>
                   ) : item.badge > 0 && (
-                    <span style={{ background: '#dc2626', color: '#fff', fontSize: 10, fontWeight: 700, padding: '2px 7px', borderRadius: 20 }}>
+                    <span style={{ background: '#D5493A', color: '#fff', fontSize: 10, fontWeight: 700, padding: '2px 7px', borderRadius: 20 }}>
                       {item.badge}
                     </span>
                   )}
@@ -159,7 +159,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                     padding: '7px 14px',
                     fontSize: 12,
                     fontWeight: 500,
-                    color: '#4338ca',
+                    color: '#14337F',
                     whiteSpace: 'nowrap',
                     boxShadow: '0 4px 16px rgba(0,0,0,0.10)',
                     zIndex: 200,
@@ -197,7 +197,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             >
               <Bell size={19} color="#6b7280" strokeWidth={2} />
               {unreadCount > 0 && (
-                <div style={{ position: 'absolute', top: -4, right: -4, width: 18, height: 18, borderRadius: '50%', background: '#dc2626', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 9, fontWeight: 700, color: '#fff', border: '2px solid #fff' }}>
+                <div style={{ position: 'absolute', top: -4, right: -4, width: 18, height: 18, borderRadius: '50%', background: '#D5493A', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 9, fontWeight: 700, color: '#fff', border: '2px solid #fff' }}>
                   {unreadCount}
                 </div>
               )}
@@ -206,8 +206,8 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             {showNotif && (
               <div style={{ position: 'absolute', top: 50, right: 0, width: 340, background: '#fff', border: '1px solid rgba(0,0,0,0.1)', borderRadius: 12, boxShadow: '0 8px 30px rgba(0,0,0,0.12)', zIndex: 999, overflow: 'hidden' }}>
                 <div style={{ padding: '12px 16px', borderBottom: '1px solid rgba(0,0,0,0.07)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <div style={{ fontSize: 13, fontWeight: 600, color: '#0d0d12' }}>Notifications</div>
-                  <span style={{ fontSize: 10, color: '#6366f1', cursor: 'pointer', fontWeight: 500 }} onClick={() => { setUnreadCount(0); setReadIds(new Set(alerts.map(a => a.id))) }}>Mark all read</span>
+                  <div style={{ fontSize: 13, fontWeight: 600, color: '#12141A' }}>Notifications</div>
+                  <span style={{ fontSize: 10, color: '#1F3A93', cursor: 'pointer', fontWeight: 500 }} onClick={() => { setUnreadCount(0); setReadIds(new Set(alerts.map(a => a.id))) }}>Mark all read</span>
                 </div>
                 {alerts.map((alert, idx) => {
                   const isUnread = !readIds.has(alert.id)
@@ -215,21 +215,21 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                     <div
                       key={alert.id}
                       onClick={() => { navigate('/queue'); setShowNotif(false) }}
-                      style={{ padding: '11px 16px', borderBottom: idx < alerts.length - 1 ? '1px solid rgba(0,0,0,0.05)' : 'none', cursor: 'pointer', background: isUnread ? '#faf9fe' : '#fff', display: 'flex', gap: 10, alignItems: 'flex-start' }}
+                      style={{ padding: '11px 16px', borderBottom: idx < alerts.length - 1 ? '1px solid rgba(0,0,0,0.05)' : 'none', cursor: 'pointer', background: isUnread ? '#F4F6FA' : '#fff', display: 'flex', gap: 10, alignItems: 'flex-start' }}
                     >
-                      <div style={{ width: 8, height: 8, borderRadius: '50%', background: severityColor[alert.severity] || '#6b6880', marginTop: 5, flexShrink: 0 }} />
+                      <div style={{ width: 8, height: 8, borderRadius: '50%', background: severityColor[alert.severity] || '#565B66', marginTop: 5, flexShrink: 0 }} />
                       <div style={{ flex: 1 }}>
-                        <div style={{ fontSize: 12, fontWeight: isUnread ? 600 : 400, color: '#0d0d12' }}>{alert.title}</div>
-                        <div style={{ fontSize: 11, color: '#6b6880', marginTop: 2 }}>{alert.provider}</div>
-                        <div style={{ fontSize: 10, color: '#a09db8', marginTop: 2 }}>{alert.time}</div>
+                        <div style={{ fontSize: 12, fontWeight: isUnread ? 600 : 400, color: '#12141A' }}>{alert.title}</div>
+                        <div style={{ fontSize: 11, color: '#565B66', marginTop: 2 }}>{alert.provider}</div>
+                        <div style={{ fontSize: 10, color: '#737985', marginTop: 2 }}>{alert.time}</div>
                       </div>
-                      <span style={{ fontSize: 9, fontWeight: 600, padding: '2px 7px', borderRadius: 20, background: alert.severity === 'HIGH' ? '#fef2f2' : alert.severity === 'MEDIUM' ? '#fffbeb' : '#f0fdf4', color: severityColor[alert.severity] }}>
+                      <span style={{ fontSize: 9, fontWeight: 600, padding: '2px 7px', borderRadius: 20, background: alert.severity === 'HIGH' ? '#fef2f2' : alert.severity === 'MEDIUM' ? '#fffbeb' : '#F0FAF4', color: severityColor[alert.severity] }}>
                         {alert.severity}
                       </span>
                     </div>
                   )
                 })}
-                <div onClick={() => { navigate('/queue'); setShowNotif(false) }} style={{ padding: '10px 16px', background: '#f5f8ff', textAlign: 'center', fontSize: 12, color: '#6366f1', cursor: 'pointer', fontWeight: 500 }}>
+                <div onClick={() => { navigate('/queue'); setShowNotif(false) }} style={{ padding: '10px 16px', background: '#EAF1F6', textAlign: 'center', fontSize: 12, color: '#1F3A93', cursor: 'pointer', fontWeight: 500 }}>
                   View all in Work Queue →
                 </div>
               </div>
@@ -240,13 +240,13 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           <div ref={userRef} style={{ position: 'relative', marginLeft: 4 }}>
             <div
               onClick={() => setShowUser(p => !p)}
-              style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '6px 14px 6px 7px', borderRadius: 10, border: '1px solid #e5e7eb', background: showUser ? '#f0f4ff' : '#f9fafb', cursor: 'pointer', transition: 'background 0.15s' }}
+              style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '6px 14px 6px 7px', borderRadius: 10, border: '1px solid #e5e7eb', background: showUser ? '#EAF1F6' : '#f9fafb', cursor: 'pointer', transition: 'background 0.15s' }}
             >
-              <div style={{ width: 32, height: 32, borderRadius: '50%', background: '#6366f1', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 700, color: '#fff', flexShrink: 0 }}>
+              <div style={{ width: 32, height: 32, borderRadius: '50%', background: 'linear-gradient(135deg, #152670 0%, #47B1BF 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 700, color: '#fff', flexShrink: 0 }}>
                 {currentUser.initials}
               </div>
               <div style={{ lineHeight: 1 }}>
-                <div style={{ fontSize: 13, fontWeight: 600, color: '#1e1b4b' }}>{currentUser.name}</div>
+                <div style={{ fontSize: 13, fontWeight: 600, color: '#0E2A6B' }}>{currentUser.name}</div>
                 <div style={{ fontSize: 10, color: '#9ca3af', marginTop: 3 }}>{currentUser.role}</div>
               </div>
             </div>
@@ -256,7 +256,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
               <div style={{ position: 'absolute', top: 'calc(100% + 10px)', right: 0, width: 240, background: '#fff', border: '1px solid #e5e7eb', borderRadius: 14, boxShadow: '0 8px 30px rgba(0,0,0,0.10)', zIndex: 999, overflow: 'hidden' }}>
                 {/* Profile section */}
                 <div style={{ padding: '16px 16px 14px' }}>
-                  <div style={{ fontSize: 14, fontWeight: 700, color: '#1e1b4b', marginBottom: 3 }}>{currentUser.name}</div>
+                  <div style={{ fontSize: 14, fontWeight: 700, color: '#0E2A6B', marginBottom: 3 }}>{currentUser.name}</div>
                   <div style={{ fontSize: 12, color: '#9ca3af', marginBottom: 12 }}>{`${currentUser.username}@infinite.com`}</div>
 
                 </div>
@@ -283,7 +283,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       </nav>
 
       {/* ── MAIN CONTENT ── */}
-      <div className="main-content" style={{ flex: 1, overflow: 'hidden', background: darkMode ? '#0f0f1a' : '#eef2ff', display: 'flex', flexDirection: 'column' }}>
+      <div className="main-content" style={{ flex: 1, overflow: 'hidden', background: darkMode ? '#0f0f1a' : '#E6ECFA', display: 'flex', flexDirection: 'column' }}>
         {children}
       </div>
 
