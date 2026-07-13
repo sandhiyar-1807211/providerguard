@@ -1,3 +1,4 @@
+import { authFetch } from '../auth/authFetch'
 import { useState, useEffect, Fragment } from 'react'
 import { useSearchParams, useNavigate } from 'react-router-dom'
 import type { Issue } from '../types'
@@ -371,7 +372,7 @@ function IssueModal({ issue, onClose, onStatusChange }: { issue: Issue; onClose:
   async function handleAccept() {
     setSaving(true)
     try {
-      await fetch(`${API}/api/findings/${encodeURIComponent(issue.sequence_id)}/resolve`, { credentials: 'include',
+      await authFetch(`${API}/api/findings/${encodeURIComponent(issue.sequence_id)}/resolve`, { credentials: 'include',
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -398,7 +399,7 @@ function IssueModal({ issue, onClose, onStatusChange }: { issue: Issue; onClose:
     setFpError(false)
     setSaving(true)
     try {
-      await fetch(`${API}/api/findings/${encodeURIComponent(issue.sequence_id)}/resolve`, { credentials: 'include',
+      await authFetch(`${API}/api/findings/${encodeURIComponent(issue.sequence_id)}/resolve`, { credentials: 'include',
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -598,7 +599,7 @@ export default function WorkQueue() {
   // Fetch issues from API — polls every 30 seconds
   useEffect(() => {
     function loadIssues() {
-      fetch(`${API}/api/findings`, { credentials: 'include' })
+      authFetch(`${API}/api/findings`, { credentials: 'include' })
         .then(r => r.json())
         .then(data => {
           const normalized = data.map((i: any) => ({

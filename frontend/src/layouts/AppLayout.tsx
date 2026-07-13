@@ -1,3 +1,4 @@
+import { authFetch } from '../auth/authFetch'
 import React, { useState, useRef, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useWindowsUser } from '../hooks/useWindowsUser'
@@ -35,7 +36,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     // Fetch live open issues for notifications + badge count
-    fetch('http://localhost:3003/api/findings', { credentials: 'include' })
+    authFetch('http://localhost:3003/api/findings', { credentials: 'include' })
       .then(r => r.json())
       .then(data => {
         const open = Array.isArray(data) ? data.filter((i: any) => i.status === 'Open to Resolve' || i.status === 'OPEN') : []

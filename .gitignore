@@ -7,3 +7,4 @@ frontend/.env
 backend/.env
 *.log
 .DS_Store
+frontend/.env

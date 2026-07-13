@@ -1,3 +1,4 @@
+import { authFetch } from '../auth/authFetch'
 import { useNavigate } from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react'
 import { TrendingDown, ClipboardList, Clock, CheckCheck } from 'lucide-react'
@@ -87,7 +88,7 @@ export default function Dashboard() {
     setAgentRunning(true)
     setAgentToast(null)
     try {
-      const res = await fetch(`${API}/api/agent/trigger`, { method: 'POST', credentials: 'include' })
+      const res = await authFetch(`${API}/api/agent/trigger`, { method: 'POST', credentials: 'include' })
       const data = await res.json()
       if (res.ok && data.success) {
         const batchMsg = data.batchId ? ` — Batch ${data.batchId}` : ''
@@ -105,9 +106,9 @@ export default function Dashboard() {
 
   useEffect(() => {
     Promise.all([
-      fetch(`${API}/api/findings`, { credentials: 'include' }).then(r => r.json()),
-      fetch(`${API}/api/batches`, { credentials: 'include' }).then(r => r.json()),
-      fetch(`${API}/api/findings/summary`, { credentials: 'include' }).then(r => r.json()),
+      authFetch(`${API}/api/findings`, { credentials: 'include' }).then(r => r.json()),
+      authFetch(`${API}/api/batches`, { credentials: 'include' }).then(r => r.json()),
+      authFetch(`${API}/api/findings/summary`, { credentials: 'include' }).then(r => r.json()),
     ]).then(([issues, batches, summary]) => {
       setApiIssues(Array.isArray(issues) ? issues : [])
       setApiBatches(Array.isArray(batches) ? batches : [])

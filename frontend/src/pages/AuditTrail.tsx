@@ -1,3 +1,4 @@
+import { authFetch } from '../auth/authFetch'
 import { useState, useEffect } from 'react'
 
 const API = 'http://localhost:3003'
@@ -94,7 +95,7 @@ export default function AuditTrail() {
     if (search) params.set('search', search)
     if (filterAction !== 'All actions') params.set('action', filterAction)
 
-    fetch(`${API}/api/audit?${params}`, { credentials: 'include' })
+    authFetch(`${API}/api/audit?${params}`, { credentials: 'include' })
       .then(r => r.json())
       .then(data => {
         setLogs(Array.isArray(data) ? data : [])
